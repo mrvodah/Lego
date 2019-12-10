@@ -4,13 +4,18 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.example.lego.models.User;
+
+/**
+ * Created by VietVan on 29/05/2018.
+ */
+
 public class Util {
+    public static User currentUser;
 
     public static String DELETE = "DELETE";
     public static String USER_KEY = "USER";
     public static String PW_KEY = "PASSWORD";
-
-    private static final String BASE_URL = "https://fcm.googleapis.com/";
 
     public static String convertCodeToStatus(String code){
         if(code.equals("0"))
@@ -25,10 +30,10 @@ public class Util {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         if(connectivityManager != null){
-            NetworkInfo[] info = connectivityManager.getAllNetworkInfo();
-            if(info != null){
-                for(int i=0;i<info.length;i++){
-                    if(info[i].getState() == NetworkInfo.State.CONNECTED)
+            NetworkInfo[] infos = connectivityManager.getAllNetworkInfo();
+            if(infos != null){
+                for(int i=0;i<infos.length;i++){
+                    if(infos[i].getState() == NetworkInfo.State.CONNECTED)
                         return true;
                 }
             }
@@ -36,5 +41,4 @@ public class Util {
 
         return false;
     }
-
 }

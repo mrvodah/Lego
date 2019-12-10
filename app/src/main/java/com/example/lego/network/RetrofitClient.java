@@ -26,20 +26,6 @@ public class RetrofitClient {
     public static Retrofit getClient() {
         if (retrofit == null) {
 
-            // add header Authorization
-            OkHttpClient okHttpClient = new OkHttpClient().newBuilder().addInterceptor(new Interceptor() {
-                @Override
-                public okhttp3.Response intercept(Chain chain) throws IOException {
-                    Request originalRequest = chain.request();
-
-                    Request.Builder builder = originalRequest.newBuilder().header("Authorization",
-                            Credentials.basic("aUsername", "aPassword"));
-
-                    Request newRequest = builder.build();
-                    return chain.proceed(newRequest);
-                }
-            }).build();
-
             OkHttpClient client = new OkHttpClient.Builder()
                     .addNetworkInterceptor(new StethoInterceptor())
 //                    .addInterceptor(new ChuckInterceptor(context))
