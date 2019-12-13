@@ -31,8 +31,6 @@ public class SignUp extends AppCompatActivity {
     MaterialEditText edtNane;
     @BindView(R.id.edtPassword)
     MaterialEditText edtPassword;
-    @BindView(R.id.edtSecureCode)
-    MaterialEditText edtSecureCode;
 
     FirebaseDatabase database;
     DatabaseReference table_user;
@@ -82,8 +80,7 @@ public class SignUp extends AppCompatActivity {
                     else {
                         User user = new User(
                                 edtNane.getText().toString(),
-                                edtPassword.getText().toString(),
-                                edtSecureCode.getText().toString()
+                                edtPassword.getText().toString()
                         );
 
                         table_user.child(edtPhone.getText().toString()).setValue(user);

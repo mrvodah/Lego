@@ -44,8 +44,6 @@ public class SignIn extends AppCompatActivity {
     FButton siBtnSignIn;
     @BindView(R.id.cbRemember)
     CheckBox cbRemember;
-    @BindView(R.id.tvForgotPwd)
-    TextView tvForgotPwd;
 
     FirebaseDatabase database;
     DatabaseReference table_user;
@@ -75,62 +73,6 @@ public class SignIn extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         table_user = database.getReference("User");
-
-        tvForgotPwd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                LayoutInflater inflater = SignIn.this.getLayoutInflater();
-                View view = inflater.inflate(R.layout.forgot_password_layout, null);
-
-                final MaterialEditText phone, secureCode;
-                phone = view.findViewById(R.id.edtPhone);
-                secureCode = view.findViewById(R.id.edtSecureCode);
-
-                new AlertDialog.Builder(SignIn.this)
-                        .setTitle("Forgot Password?")
-                        .setMessage("Enter your secure code")
-                        .setIcon(R.drawable.ic_security_black_24dp)
-                        .setView(view)
-                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                table_user.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                        if (dataSnapshot.child(phone.getText().toString()).exists()) {
-
-                                            User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
-
-                                            if (user.getSecureCode().equals(secureCode.getText().toString())) {
-                                                Toast.makeText(SignIn.this, "Your password: " + user.getPassword(), Toast.LENGTH_SHORT).show();
-                                            }
-                                            else
-                                                Toast.makeText(SignIn.this, "Wrong secureCode?", Toast.LENGTH_SHORT).show();
-
-                                        } else {
-                                            Toast.makeText(SignIn.this, "User doesn't exists in db!", Toast.LENGTH_SHORT).show();
-                                        }
-
-                                    }
-
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
-
-                                    }
-                                });
-                            }
-                        })
-                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .show();
-            }
-        });
     }
 
     @OnClick(R.id.si_btnSignIn)

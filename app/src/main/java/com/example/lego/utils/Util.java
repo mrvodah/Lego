@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.example.lego.models.Request;
 import com.example.lego.models.User;
 
 /**
@@ -12,10 +13,13 @@ import com.example.lego.models.User;
 
 public class Util {
     public static User currentUser;
+    public static Request currentRequest;
 
     public static String DELETE = "DELETE";
     public static String USER_KEY = "USER";
     public static String PW_KEY = "PASSWORD";
+
+    public static String UPDATE = "UPDATE";
 
     public static String convertCodeToStatus(String code){
         if(code.equals("0"))

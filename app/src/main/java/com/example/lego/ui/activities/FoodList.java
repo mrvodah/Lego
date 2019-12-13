@@ -1,13 +1,21 @@
 package com.example.lego.ui.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,20 +27,33 @@ import com.example.lego.interfaces.ItemClickListener;
 import com.example.lego.models.Food;
 import com.example.lego.models.Order;
 import com.example.lego.ui.adapters.FoodViewHolder;
+import com.example.lego.utils.Util;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.common.internal.service.Common;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import info.hoang8f.widget.FButton;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -49,6 +70,7 @@ public class FoodList extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
 
     FirebaseDatabase database;
+    StorageReference storageReference;
 
     DatabaseReference foodList;
     FirebaseRecyclerAdapter<Food, FoodViewHolder> adapter;
@@ -59,6 +81,16 @@ public class FoodList extends AppCompatActivity {
 
     String categoryId;
     Database localDB;
+
+    TextView name, description, price, discount;
+    FButton select, upload;
+
+    Food newFood;
+    Uri saveUri;
+    public final int PICK_IMAGE_REQUEST = 11;
+
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -82,7 +114,8 @@ public class FoodList extends AppCompatActivity {
 
         //Init firebase
         database = FirebaseDatabase.getInstance();
-        foodList = database.getReference("Foods");
+        foodList = database.getReference("Product");
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         //LocalDB
         localDB = new Database(this);
@@ -224,7 +257,7 @@ public class FoodList extends AppCompatActivity {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
                         Intent intent = new Intent(FoodList.this, FoodDetail.class);
-                        intent.putExtra("FoodId", searchAdapter.getRef(position).getKey());
+                        intent.putExtra("ProductId", searchAdapter.getRef(position).getKey());
                         startActivity(intent);
                     }
                 });
@@ -235,7 +268,7 @@ public class FoodList extends AppCompatActivity {
     }
 
     private void loadSuggest() {
-        foodList.orderByChild("menuId").equalTo(categoryId)
+        foodList.orderByChild("categoryId").equalTo(categoryId)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -257,7 +290,7 @@ public class FoodList extends AppCompatActivity {
                 Food.class,
                 R.layout.food_item,
                 FoodViewHolder.class,
-                foodList.orderByChild("menuId").equalTo(categoryId)
+                foodList.orderByChild("categoryId").equalTo(categoryId)
         ) {
             @Override
             protected void populateViewHolder(final FoodViewHolder viewHolder, final Food model, final int position) {
@@ -305,7 +338,7 @@ public class FoodList extends AppCompatActivity {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
                         Intent intent = new Intent(FoodList.this, FoodDetail.class);
-                        intent.putExtra("FoodId", adapter.getRef(position).getKey());
+                        intent.putExtra("ProductId", adapter.getRef(position).getKey());
                         startActivity(intent);
                     }
                 });
@@ -315,4 +348,238 @@ public class FoodList extends AppCompatActivity {
         rvFoodlist.setAdapter(adapter);
         swipeLayout.setRefreshing(false);
     }
+
+    @OnClick(R.id.fab)
+    public void onViewClicked() {
+        showAddProductDialog();
+    }
+
+    private void showAddProductDialog() {
+        LayoutInflater inflater = this.getLayoutInflater();
+        View v = inflater.inflate(R.layout.add_new_food_layout, null);
+
+        name = v.findViewById(R.id.edtName);
+        description = v.findViewById(R.id.edtDescription);
+        price = v.findViewById(R.id.edtPrice);
+        discount = v.findViewById(R.id.edtDiscount);
+        select = v.findViewById(R.id.btnSelect);
+        upload = v.findViewById(R.id.btnUpload);
+
+        new AlertDialog.Builder(this)
+                .setTitle("Add new Food")
+                .setMessage("Please fill full information")
+                .setView(v)
+                .setIcon(R.drawable.ic_shopping_cart_black_24dp)
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (newFood != null) {
+                            foodList.push().setValue(newFood);
+                            Snackbar.make(swipeLayout, "New category: " + newFood.getName() + " was added!", Snackbar.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+
+        select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseImage();
+            }
+        });
+
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadImage();
+            }
+        });
+    }
+
+    private void chooseImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+    }
+
+    private void uploadImage() {
+        if (saveUri != null) {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Uploading ...");
+            progressDialog.show();
+
+            String imageName = UUID.randomUUID().toString();
+            final StorageReference imageFolder = storageReference.child("images/" + imageName);
+            imageFolder.putFile(saveUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+                            Toast.makeText(FoodList.this, "Uploaded !", Toast.LENGTH_SHORT).show();
+                            imageFolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    // set value for newCategory if image upload and we can get download link
+                                    newFood = new Food(
+                                            name.getText().toString(),
+                                            uri.toString(),
+                                            description.getText().toString(),
+                                            price.getText().toString(),
+                                            discount.getText().toString(),
+                                            categoryId
+                                    );
+                                }
+                            });
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(FoodList.this, "Upload failure ... " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                            progressDialog.setMessage("Uploaded: " + progress + "%");
+                        }
+                    });
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST &&
+                resultCode == RESULT_OK
+                && data != null &&
+                data.getData() != null) {
+            saveUri = data.getData();
+            select.setText("Image Selected");
+        }
+    }
+
+    private void showDialogUpdateFood(final String key, final Food item) {
+        LayoutInflater inflater = this.getLayoutInflater();
+        View v = inflater.inflate(R.layout.add_new_food_layout, null);
+
+        name = v.findViewById(R.id.edtName);
+        description = v.findViewById(R.id.edtDescription);
+        price = v.findViewById(R.id.edtPrice);
+        discount = v.findViewById(R.id.edtDiscount);
+        select = v.findViewById(R.id.btnSelect);
+        upload = v.findViewById(R.id.btnUpload);
+
+        name.setText(item.getName());
+        description.setText(item.getDescription());
+        price.setText(item.getPrice());
+        discount.setText(item.getDiscount());
+
+        new AlertDialog.Builder(this)
+                .setTitle("Add new Food")
+                .setMessage("Please fill full information")
+                .setView(v)
+                .setIcon(R.drawable.ic_shopping_cart_black_24dp)
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                        // Update food
+                        item.setName(name.getText().toString());
+                        item.setDescription(description.getText().toString());
+                        item.setPrice(price.getText().toString());
+                        item.setDiscount(discount.getText().toString());
+                        foodList.child(key).setValue(item);
+                    }
+                })
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+
+        select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseImage();
+            }
+        });
+
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeImage(item);
+            }
+        });
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if(item.getTitle().equals(Util.UPDATE)){
+            showDialogUpdateFood(adapter.getRef(item.getOrder()).getKey(), adapter.getItem(item.getOrder()));
+        }
+        else if(item.getTitle().equals(Util.DELETE)){
+            deleteFood(adapter.getRef(item.getOrder()).getKey());
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    private void deleteFood(String key) {
+        foodList.child(key).removeValue();
+        Toast.makeText(this, "Item Deleted!", Toast.LENGTH_SHORT).show();
+    }
+
+
+    private void changeImage(final Food item) {
+        if (saveUri != null) {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Uploading ...");
+            progressDialog.show();
+
+            String imageName = UUID.randomUUID().toString();
+            final StorageReference imageFolder = storageReference.child("images/" + imageName);
+            imageFolder.putFile(saveUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+                            Toast.makeText(FoodList.this, "Uploaded !", Toast.LENGTH_SHORT).show();
+                            imageFolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    // set value for newCategory if image upload and we can get download link
+                                    item.setImage(uri.toString());
+                                }
+                            });
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(FoodList.this, "Upload failure ... " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                            progressDialog.setMessage("Uploaded: " + progress + "%");
+                        }
+                    });
+        }
+    }
+
 }

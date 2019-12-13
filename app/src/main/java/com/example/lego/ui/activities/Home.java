@@ -1,8 +1,10 @@
 package com.example.lego.ui.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -25,26 +27,35 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.andremion.counterfab.CounterFab;
 import com.example.lego.R;
+import com.example.lego.services.ListenOrder;
 import com.example.lego.utils.Util;
 import com.example.lego.database.Database;
 import com.example.lego.interfaces.ItemClickListener;
 import com.example.lego.models.Category;
-import com.example.lego.Service.ListenDialog;
+import com.example.lego.services.ListenDialog;
 import com.example.lego.ui.adapters.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import info.hoang8f.widget.FButton;
 import io.paperdb.Paper;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -56,14 +67,24 @@ public class Home extends AppCompatActivity
     FirebaseDatabase database;
     DatabaseReference category;
     DatabaseReference user;
+    StorageReference storageReference;
 
     @BindView(R.id.sw_layout)
     SwipeRefreshLayout swLayout;
     @BindView(R.id.rv_menu)
     RecyclerView rvMenu;
 
+    TextView name;
+    FButton select, upload;
+
     TextView tvFullName;
     CounterFab fab;
+    FloatingActionButton fab_add;
+
+    Category newCategory;
+    DrawerLayout drawer;
+    Uri saveUri;
+    public final int PICK_IMAGE_REQUEST = 11;
 
     FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter;
 
@@ -86,7 +107,7 @@ public class Home extends AppCompatActivity
 
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Menu");
         setSupportActionBar(toolbar);
 
@@ -94,6 +115,7 @@ public class Home extends AppCompatActivity
         database = FirebaseDatabase.getInstance();
         category = database.getReference("Category");
         user = database.getReference("User");
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(
                 Category.class,
@@ -152,7 +174,15 @@ public class Home extends AppCompatActivity
         });
         fab.setCount(new Database(Home.this).getCarts().size());
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        fab_add = (FloatingActionButton) findViewById(R.id.fab_add);
+        fab_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog();
+            }
+        });
+
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -172,9 +202,118 @@ public class Home extends AppCompatActivity
         LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(rvMenu.getContext(), R.anim.layout_fall_down);
         rvMenu.setLayoutAnimation(controller);
 
-        // register service
         Intent service = new Intent(Home.this, ListenDialog.class);
         startService(service);
+
+        Intent serviceOrder = new Intent(Home.this, ListenOrder.class);
+        startService(serviceOrder);
+    }
+
+    private void showDialog() {
+        LayoutInflater inflater = this.getLayoutInflater();
+        View v = inflater.inflate(R.layout.add_new_menu_layout, null);
+
+        name = v.findViewById(R.id.edtName);
+        select = v.findViewById(R.id.btnSelect);
+        upload = v.findViewById(R.id.btnUpload);
+
+        new AlertDialog.Builder(this)
+                .setTitle("Add new Category")
+                .setMessage("Please fill full information")
+                .setView(v)
+                .setIcon(R.drawable.ic_shopping_cart_black_24dp)
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(newCategory != null){
+                            category.push().setValue(newCategory);
+                            adapter.notifyDataSetChanged();
+                            Snackbar.make(drawer, "New category: " + newCategory.getName() + " was added!", Snackbar.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+
+        select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseImage();
+            }
+        });
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadImage();
+            }
+        });
+    }
+
+    private void chooseImage() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+    }
+
+    private void uploadImage() {
+        if(saveUri != null){
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Uploading ...");
+            progressDialog.show();
+
+            String imageName = UUID.randomUUID().toString();
+            final StorageReference imageFolder = storageReference.child("images/" + imageName);
+            imageFolder.putFile(saveUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+                            Toast.makeText(Home.this, "Uploaded !", Toast.LENGTH_SHORT).show();
+                            imageFolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    // set value for newCategory if image upload and we can get download link
+                                    newCategory = new Category(
+                                            name.getText().toString(),
+                                            uri.toString()
+                                    );
+                                }
+                            });
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(Home.this, "Upload failure ... " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                            progressDialog.setMessage("Uploaded: " + progress + "%");
+                        }
+                    });
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == PICK_IMAGE_REQUEST &&
+                resultCode == RESULT_OK
+                && data != null &&
+                data.getData() != null){
+            saveUri = data.getData();
+            select.setText("Image Selected");
+        }
     }
 
     @Override
@@ -194,7 +333,6 @@ public class Home extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -286,6 +424,7 @@ public class Home extends AppCompatActivity
             Intent intent = new Intent(Home.this, SignIn.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

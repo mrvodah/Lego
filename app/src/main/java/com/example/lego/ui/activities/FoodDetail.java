@@ -92,7 +92,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
 
         // Init Firebase
         database = FirebaseDatabase.getInstance();
-        foods = database.getReference("Foods");
+        foods = database.getReference("Product");
         ratingTbl = database.getReference("Rating");
 
         // Init View
@@ -116,7 +116,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
         btnCart.setCount(new Database(this).getCarts().size());
 
         if (getIntent() != null) {
-            foodId = getIntent().getStringExtra("FoodId");
+            foodId = getIntent().getStringExtra("ProductId");
             getDetailFood(foodId);
             getRatingFood(foodId);
         }

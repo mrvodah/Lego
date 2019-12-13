@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.lego">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -31,7 +33,12 @@
         <activity android:name=".ui.activities.OrderStatus" />
 
         <service
-            android:name=".Service.ListenDialog"
+            android:name=".services.ListenDialog"
+            android:enabled="true"
+            android:exported="true" />
+
+        <service
+            android:name=".Service.ListenOrder"
             android:enabled="true"
             android:exported="true" />
 
