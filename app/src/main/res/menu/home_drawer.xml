@@ -3,7 +3,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+    <item android:title="Quản lý chung"
+        android:iconTint="@color/white">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/nav_1"
+                    android:icon="@drawable/ic_restaurant_black_24dp"
+                    android:iconTint="@android:color/white"
+                    android:title="Danh sách Lego" />
+
+                <item
+                    android:id="@+id/nav_2"
+                    android:icon="@drawable/ic_restaurant_black_24dp"
+                    android:iconTint="@android:color/white"
+                    android:title="Bán Lego" />
+
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Trạng thái đơn">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/nav_3"
+                    android:icon="@drawable/ic_restaurant_black_24dp"
+                    android:iconTint="@android:color/white"
+                    android:title="Đơn thuê" />
+
+                <item
+                    android:id="@+id/nav_4"
+                    android:icon="@drawable/ic_restaurant_black_24dp"
+                    android:iconTint="@android:color/white"
+                    android:title="Đơn bán" />
+
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Trợ giúp">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/nav_5"
+                    android:icon="@drawable/ic_security_black_24dp"
+                    android:iconTint="@android:color/white"
+                    android:title="Change Password" />
+
+                <item
+                    android:id="@+id/nav_6"
+                    android:icon="@drawable/ic_exit_to_app_black_24dp"
+                    android:iconTint="@android:color/white"
+                    android:title="Sign out" />
+
+            </group>
+        </menu>
+    </item>
+
     <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_sell"
+            android:icon="@drawable/ic_restaurant_black_24dp"
+            android:iconTint="@android:color/white"
+            android:title="Bán Lego" />
+
         <item
             android:id="@+id/nav_menu"
             android:icon="@drawable/ic_restaurant_black_24dp"
@@ -19,16 +87,7 @@
             android:icon="@drawable/ic_access_time_black_24dp"
             android:iconTint="@android:color/white"
             android:title="Orders" />
-        <item
-            android:id="@+id/nav_changpw"
-            android:icon="@drawable/ic_security_black_24dp"
-            android:title="Change Password"
-            />
-        <item
-            android:id="@+id/nav_log_out"
-            android:icon="@drawable/ic_exit_to_app_black_24dp"
-            android:iconTint="@android:color/white"
-            android:title="Sign out" />
+
     </group>
 
 </menu>
