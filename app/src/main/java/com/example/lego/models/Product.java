@@ -18,13 +18,16 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, String image, String description, String price, String discount, String categoryId) {
+    public Product(String name, String image, String description, String price, String discount, String categoryId, int total, String phone) {
         Name = name;
         Image = image;
         Description = description;
         Price = price;
         Discount = discount;
         CategoryId = categoryId;
+        this.total = total;
+        this.remain = total;
+        Phone = phone;
     }
 
     public String getName() {

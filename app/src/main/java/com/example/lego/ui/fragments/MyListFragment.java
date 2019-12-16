@@ -2,6 +2,7 @@ package com.example.lego.ui.fragments;
 
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,11 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +35,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -57,6 +61,8 @@ public class MyListFragment extends Fragment {
     private static final String TAG = "MyListFragment";
     @BindView(R.id.rv_menu)
     RecyclerView rvMenu;
+    @BindView(R.id.fl_container)
+    FrameLayout flContainer;
 
     FirebaseDatabase database;
     DatabaseReference category;
@@ -152,28 +158,28 @@ public class MyListFragment extends Fragment {
         select = v.findViewById(R.id.btnSelect);
         upload = v.findViewById(R.id.btnUpload);
 
-//        new AlertDialog.Builder(this)
-//                .setTitle("Add new Category")
-//                .setMessage("Please fill full information")
-//                .setView(v)
-//                .setIcon(R.drawable.ic_shopping_cart_black_24dp)
-//                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        if (newCategory != null) {
-//                            category.push().setValue(newCategory);
-//                            adapter.notifyDataSetChanged();
-//                            Snackbar.make(drawer, "New category: " + newCategory.getName() + " was added!", Snackbar.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                })
-//                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        dialog.dismiss();
-//                    }
-//                })
-//                .show();
+        new AlertDialog.Builder(getContext())
+                .setTitle("Add new Category")
+                .setMessage("Please fill full information")
+                .setView(v)
+                .setIcon(R.drawable.ic_shopping_cart_black_24dp)
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (newCategory != null) {
+                            category.push().setValue(newCategory);
+                            adapter.notifyDataSetChanged();
+                            Snackbar.make(flContainer, "New category: " + newCategory.getName() + " was added!", Snackbar.LENGTH_SHORT).show();
+                        }
+                    }
+                })
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
 
         select.setOnClickListener(new View.OnClickListener() {
             @Override

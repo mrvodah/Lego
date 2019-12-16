@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lego.R;
+import com.example.lego.ui.adapters.OrderDetailAdapter;
 import com.example.lego.utils.Util;
 
 import butterknife.BindView;
@@ -41,15 +42,15 @@ public class OrderDetail extends AppCompatActivity {
             id = getIntent().getStringExtra("OrderId");
         }
 
-//        orderId.setText("#" + id);
-//        orderPhone.setText(Util.currentRequest.getPhone());
-//        orderAddress.setText(Util.currentRequest.getAddress());
-//        orderTotal.setText(Util.currentRequest.getTotal());
-//        orderComments.setText(Util.currentRequest.getComment());
-//
-//        rvOrderDetail.setHasFixedSize(true);
-//        rvOrderDetail.setLayoutManager(new LinearLayoutManager(this));
-//        rvOrderDetail.setAdapter(new OrderDetailAdapter(Util.currentRequest.getList()));
+        orderId.setText("#" + id);
+        orderPhone.setText(Util.currentRequest.getPhone());
+        orderAddress.setText(Util.currentRequest.getAddress());
+        orderTotal.setText(Util.currentRequest.getTotal());
+        orderComments.setText(Util.currentRequest.getStartDate());
+
+        rvOrderDetail.setHasFixedSize(true);
+        rvOrderDetail.setLayoutManager(new LinearLayoutManager(this));
+        rvOrderDetail.setAdapter(new OrderDetailAdapter(Util.currentRequest.getList()));
 
     }
 }

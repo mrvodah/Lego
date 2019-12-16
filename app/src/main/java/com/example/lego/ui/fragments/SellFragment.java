@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -98,36 +99,33 @@ public class SellFragment extends Fragment {
     private void loadProduct() {
         adapter = new FirebaseRecyclerAdapter<Product, ProductWaitViewHolder>(
                 Product.class,
-                R.layout.product_item,
+                R.layout.product_wait_item,
                 ProductWaitViewHolder.class,
                 productWaitList.orderByChild("phone").equalTo(Util.currentUser.getPhone())
         ) {
             @Override
             protected void populateViewHolder(final ProductWaitViewHolder viewHolder, final Product model, final int position) {
-                if (model.getPhone().equals(Util.currentUser.getPhone())) {
+                viewHolder.getFood_name().setText(model.getName());
+                Picasso.get().load(model.getImage()).into(viewHolder.getFood_image());
 
-                    viewHolder.getFood_name().setText(model.getName());
-                    Picasso.get().load(model.getImage()).into(viewHolder.getFood_image());
+                viewHolder.getProduct_delete().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-                    viewHolder.getProduct_delete().setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
+                    }
+                });
 
-                        }
-                    });
+                viewHolder.setItemClickListener(new ItemClickListener() {
+                    @Override
+                    public void onClick(View view, int position, boolean isLongClick) {
 
-                    viewHolder.setItemClickListener(new ItemClickListener() {
-                        @Override
-                        public void onClick(View view, int position, boolean isLongClick) {
-
-                        }
-                    });
-                }
-
+                    }
+                });
             }
 
         };
 
+        rvOrder.setLayoutManager(new LinearLayoutManager(getContext()));
         rvOrder.setAdapter(adapter);
         swipeLayout.setRefreshing(false);
     }

@@ -1,6 +1,7 @@
 package com.example.lego.ui.adapters;
 
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +14,8 @@ import com.example.lego.R;
 
 public class OrderViewHolder extends RecyclerView.ViewHolder{
 
-    public TextView tvOrderId, tvOrderStatus, tvOrderPhone, tvOrderAddress;
+    public TextView tvOrderId, tvOrderStatus, tvOrderPhone, tvOrderAddress, tvOrderDate;
+    public LinearLayout lnContainer;
 
     public OrderViewHolder(View itemView) {
         super(itemView);
@@ -22,6 +24,8 @@ public class OrderViewHolder extends RecyclerView.ViewHolder{
         tvOrderStatus = itemView.findViewById(R.id.order_status);
         tvOrderPhone = itemView.findViewById(R.id.order_phone);
         tvOrderAddress = itemView.findViewById(R.id.order_address);
+        tvOrderDate = itemView.findViewById(R.id.order_date);
+        lnContainer = itemView.findViewById(R.id.ln_container);
 
     }
 
@@ -55,5 +59,21 @@ public class OrderViewHolder extends RecyclerView.ViewHolder{
 
     public void setTvOrderAddress(TextView tvOrderAddress) {
         this.tvOrderAddress = tvOrderAddress;
+    }
+
+    public TextView getTvOrderDate() {
+        return tvOrderDate;
+    }
+
+    public void setTvOrderDate(TextView tvOrderDate) {
+        this.tvOrderDate = tvOrderDate;
+    }
+
+    public LinearLayout getLnContainer() {
+        return lnContainer;
+    }
+
+    public void setLnContainer(LinearLayout lnContainer) {
+        this.lnContainer = lnContainer;
     }
 }

@@ -22,8 +22,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.lego.Constant;
 import com.example.lego.R;
+import com.example.lego.ui.fragments.HireFragment;
 import com.example.lego.ui.fragments.MyListFragment;
 import com.example.lego.ui.fragments.OtherListFragment;
+import com.example.lego.ui.fragments.SellFragment;
 import com.example.lego.utils.Util;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -130,10 +132,10 @@ public class Home extends AppCompatActivity
                 loadContent(Constant.FRAGMENT_MY_LIST);
                 break;
             case R.id.nav_3:
-
+                loadContent(Constant.FRAGMENT_HIRE_LIST);
                 break;
             case R.id.nav_4:
-
+                loadContent(Constant.FRAGMENT_SELL_LIST);
                 break;
             case R.id.nav_5:
                 View v = LayoutInflater.from(Home.this).inflate(R.layout.change_password_layout, null);
@@ -210,14 +212,6 @@ public class Home extends AppCompatActivity
                 break;
         }
 
-        if (id == R.id.nav_menu) {
-            // Handle the camera action
-        } else if (id == R.id.nav_cart) {
-            startActivity(new Intent(Home.this, Cart.class));
-        } else if (id == R.id.nav_orders) {
-            startActivity(new Intent(Home.this, OrderStatus.class));
-        }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -226,12 +220,18 @@ public class Home extends AppCompatActivity
     private void loadContent(int fragmentList) {
         Fragment fragment = new Fragment();
         Log.d(TAG, "loadContent: " + fragmentList);
-        switch (fragmentList){
+        switch (fragmentList) {
             case Constant.FRAGMENT_OTHER_LIST:
                 fragment = new OtherListFragment();
                 break;
             case Constant.FRAGMENT_MY_LIST:
                 fragment = new MyListFragment();
+                break;
+            case Constant.FRAGMENT_HIRE_LIST:
+                fragment = new HireFragment();
+                break;
+            case Constant.FRAGMENT_SELL_LIST:
+                fragment = new SellFragment();
                 break;
         }
 

@@ -63,6 +63,21 @@
                 app:met_singleLineEllipsis="true" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
+                android:id="@+id/edtTotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Number"
+                android:inputType="number"
+                android:textColor="@android:color/white"
+                android:textColorHint="@color/colorPrimary"
+                android:textSize="33sp"
+                app:met_baseColor="@color/colorPrimary"
+                app:met_floatingLabel="highlight"
+                app:met_maxCharacters="15"
+                app:met_primaryColor="@color/colorPrimary"
+                app:met_singleLineEllipsis="true" />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
                 android:id="@+id/edtDiscount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

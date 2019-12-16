@@ -85,7 +85,7 @@ public class FoodList extends AppCompatActivity {
     String categoryId;
     Database localDB;
 
-    TextView name, description, price, discount;
+    TextView name, description, price, discount, number;
     FButton select, upload;
 
     Product newFood;
@@ -504,6 +504,7 @@ public class FoodList extends AppCompatActivity {
         description = v.findViewById(R.id.edtDescription);
         price = v.findViewById(R.id.edtPrice);
         discount = v.findViewById(R.id.edtDiscount);
+        number = v.findViewById(R.id.edtTotal);
         select = v.findViewById(R.id.btnSelect);
         upload = v.findViewById(R.id.btnUpload);
 
@@ -575,7 +576,9 @@ public class FoodList extends AppCompatActivity {
                                             description.getText().toString(),
                                             price.getText().toString(),
                                             discount.getText().toString(),
-                                            categoryId
+                                            categoryId,
+                                            Integer.valueOf(number.getText().toString()),
+                                            Util.currentUser.getPhone()
                                     );
                                 }
                             });
