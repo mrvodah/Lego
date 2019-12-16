@@ -7,86 +7,86 @@
     android:background="@drawable/my_bg">
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_marginLeft="7dp"
         android:layout_marginRight="7dp"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:orientation="vertical">
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:hint="Phone Number"
             android:id="@+id/edtPhone"
-            android:textColorHint="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phone Number"
+            android:inputType="phone"
             android:text="1"
             android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
             android:textSize="33sp"
-            android:inputType="phone"
             app:met_baseColor="@android:color/white"
             app:met_floatingLabel="highlight"
             app:met_maxCharacters="15"
             app:met_primaryColor="@android:color/white"
-            app:met_singleLineEllipsis="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            app:met_singleLineEllipsis="true" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:hint="Password"
             android:id="@+id/edtPassword"
-            android:textColorHint="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="text"
             android:text="i"
             android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
             android:textSize="33sp"
-            android:inputType="text"
             app:met_baseColor="@android:color/white"
             app:met_floatingLabel="highlight"
             app:met_primaryColor="@android:color/white"
-            app:met_singleLineEllipsis="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            app:met_singleLineEllipsis="true" />
 
         <LinearLayout
-            android:weightSum="2"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
             <com.rey.material.widget.CheckBox
-                android:layout_weight="1"
                 android:id="@+id/cbRemember"
                 style="@style/Material.Drawable.CheckBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
                 android:text="Remember me"
                 android:textColor="@android:color/white"
                 app:cbd_strokeColor="@android:color/white"
-                android:gravity="center_vertical"
-                app:cbd_tickColor="@color/colorPrimaryDark"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                app:cbd_tickColor="@color/colorPrimaryDark" />
 
             <TextView
                 android:id="@+id/tvForgotPwd"
-                android:layout_weight="1"
-                android:textColor="@android:color/white"
-                android:text="@string/forgot_pwd"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/forgot_pwd"
+                android:textColor="@android:color/white" />
 
         </LinearLayout>
 
     </LinearLayout>
 
     <info.hoang8f.widget.FButton
-        android:layout_alignParentBottom="true"
         android:id="@+id/si_btnSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="7dp"
         android:text="Sign In"
+        android:textColor="@color/colorPrimary"
+        app:cornerRadius="5dp"
         app:fButtonColor="@android:color/white"
         app:shadowColor="@android:color/black"
         app:shadowEnabled="true"
-        app:shadowHeight="5dp"
-        app:cornerRadius="5dp"
-        android:textColor="@color/colorPrimary"
-        android:layout_margin="7dp"/>
+        app:shadowHeight="5dp" />
 
 </RelativeLayout>

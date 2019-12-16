@@ -24,7 +24,7 @@ import info.hoang8f.widget.FButton;
 
 public class OrderStatus extends AppCompatActivity {
 
-    @BindView(R.id.rv_order)
+    @BindView(R.id.rv_hire)
     RecyclerView rvOrder;
     @BindView(R.id.order_total)
     TextView orderTotal;

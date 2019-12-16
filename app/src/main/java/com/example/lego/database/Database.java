@@ -36,7 +36,9 @@ public class Database extends SQLiteAssetHelper {
                     cursor.getString(2),
                     cursor.getString(3),
                     cursor.getString(4),
-                    cursor.getString(5)
+                    cursor.getString(5),
+                    cursor.getString(6),
+                    cursor.getString(7)
             ));
 
             cursor.moveToNext();
@@ -54,6 +56,8 @@ public class Database extends SQLiteAssetHelper {
         values.put("Quantity", order.getQuantity());
         values.put("Price", order.getPrice());
         values.put("Discount", order.getDiscount());
+        values.put("StartDate", order.getStartDate());
+        values.put("EndDate", order.getEndDate());
 
         sqLiteDatabase.insert("OrderDetail", null, values);
     }
@@ -66,24 +70,24 @@ public class Database extends SQLiteAssetHelper {
     }
 
     //Favorties
-    public void addToFavorites(String foodId){
-        SQLiteDatabase db = getWritableDatabase();;
+    public void addToFavorites(String productId){
+        SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put("FoodId", foodId);
+        values.put("ProductId", productId);
 
         db.insert("Favorites", null, values);
     }
 
-    public void removeFromFavorites(String foodId){
-        SQLiteDatabase db = getWritableDatabase();;
+    public void removeFromFavorites(String productId){
+        SQLiteDatabase db = getWritableDatabase();
 
-        db.delete("Favorites", "FoodId = " + foodId, null);
+        db.delete("Favorites", "ProductId = " + productId, null);
     }
 
-    public boolean isFavorite(String foodId){
+    public boolean isFavorite(String productId){
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery("select * from Favorites where FoodId = " + foodId, null);
+        Cursor cursor = sqLiteDatabase.rawQuery("select * from Favorites where ProductId = " + productId, null);
 
         if(cursor.getCount() <= 0){
             cursor.close();

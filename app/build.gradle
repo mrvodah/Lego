@@ -31,8 +31,8 @@ dependencies {
 
     // bindview
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.jakewharton:butterknife:10.0.0'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+    implementation 'com.jakewharton:butterknife:10.1.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
 
     // view
     implementation('com.github.jd-alexander:android-flat-button:v1.1')

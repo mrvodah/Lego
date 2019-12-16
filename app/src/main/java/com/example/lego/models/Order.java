@@ -13,25 +13,48 @@ public class Order implements Serializable {
     private String Quantity;
     private String Price;
     private String Discount;
+    private String startDate;
+    private String endDate;
 
     public Order() {
     }
 
-    public Order(String productId, String productName, String quantity, String price, String discount) {
+//    public Order(String productId, String productName, String quantity, String price, String discount) {
+//        ProductId = productId;
+//        ProductName = productName;
+//        Quantity = quantity;
+//        Price = price;
+//        Discount = discount;
+//    }
+
+    public Order(String productId, String productName, String quantity, String price, String discount, String startDate, String endDate) {
         ProductId = productId;
         ProductName = productName;
         Quantity = quantity;
         Price = price;
         Discount = discount;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
-    public Order(int ID, String productId, String productName, String quantity, String price, String discount) {
+//    public Order(int ID, String productId, String productName, String quantity, String price, String discount) {
+//        this.ID = ID;
+//        ProductId = productId;
+//        ProductName = productName;
+//        Quantity = quantity;
+//        Price = price;
+//        Discount = discount;
+//    }
+
+    public Order(int ID, String productId, String productName, String quantity, String price, String discount, String startDate, String endDate) {
         this.ID = ID;
         ProductId = productId;
         ProductName = productName;
         Quantity = quantity;
         Price = price;
         Discount = discount;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     public int getID() {
@@ -80,5 +103,21 @@ public class Order implements Serializable {
 
     public void setDiscount(String discount) {
         Discount = discount;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 }

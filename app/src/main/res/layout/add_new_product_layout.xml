@@ -1,115 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
-        app:cardElevation="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:padding="11dp"
         app:cardBackgroundColor="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        app:cardElevation="5dp">
 
         <LinearLayout
-            android:layout_margin="19dp"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="19dp"
+            android:orientation="vertical">
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:hint="Name"
                 android:id="@+id/edtName"
-                android:textColorHint="@color/colorPrimary"
-                android:textColor="@android:color/white"
-                android:textSize="33sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name"
                 android:inputType="text"
+                android:textColor="@android:color/white"
+                android:textColorHint="@color/colorPrimary"
+                android:textSize="33sp"
                 app:met_baseColor="@color/colorPrimary"
                 app:met_floatingLabel="highlight"
                 app:met_maxCharacters="15"
                 app:met_primaryColor="@color/colorPrimary"
-                app:met_singleLineEllipsis="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                app:met_singleLineEllipsis="true" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:hint="Description"
                 android:id="@+id/edtDescription"
-                android:textColorHint="@color/colorPrimary"
-                android:textColor="@android:color/white"
-                android:textSize="25sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Description"
                 android:inputType="textMultiLine"
+                android:textColor="@android:color/white"
+                android:textColorHint="@color/colorPrimary"
+                android:textSize="25sp"
                 app:met_baseColor="@color/colorPrimary"
                 app:met_floatingLabel="highlight"
                 app:met_maxCharacters="15"
                 app:met_primaryColor="@color/colorPrimary"
-                app:met_singleLineEllipsis="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                app:met_singleLineEllipsis="true" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:hint="Price"
                 android:id="@+id/edtPrice"
-                android:textColorHint="@color/colorPrimary"
-                android:textColor="@android:color/white"
-                android:textSize="33sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Price"
                 android:inputType="number"
+                android:textColor="@android:color/white"
+                android:textColorHint="@color/colorPrimary"
+                android:textSize="33sp"
                 app:met_baseColor="@color/colorPrimary"
                 app:met_floatingLabel="highlight"
                 app:met_maxCharacters="15"
                 app:met_primaryColor="@color/colorPrimary"
-                app:met_singleLineEllipsis="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                app:met_singleLineEllipsis="true" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
-                android:hint="Discount"
                 android:id="@+id/edtDiscount"
-                android:textColorHint="@color/colorPrimary"
-                android:textColor="@android:color/white"
-                android:textSize="33sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Discount"
                 android:inputType="text"
+                android:textColor="@android:color/white"
+                android:textColorHint="@color/colorPrimary"
+                android:textSize="33sp"
                 app:met_baseColor="@color/colorPrimary"
                 app:met_floatingLabel="highlight"
                 app:met_maxCharacters="15"
                 app:met_primaryColor="@color/colorPrimary"
-                app:met_singleLineEllipsis="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                app:met_singleLineEllipsis="true" />
 
             <LinearLayout
-                android:weightSum="2"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
                 <info.hoang8f.widget.FButton
                     android:id="@+id/btnSelect"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_margin="7dp"
+                    android:layout_weight="1"
                     android:text="Select"
+                    android:textColor="@android:color/white"
+                    app:cornerRadius="5dp"
                     app:fButtonColor="@color/btnSignUp"
                     app:shadowColor="@android:color/black"
                     app:shadowEnabled="true"
-                    app:shadowHeight="5dp"
-                    app:cornerRadius="5dp"
-                    android:textColor="@android:color/white"
-                    android:layout_margin="7dp"/>
+                    app:shadowHeight="5dp" />
 
                 <info.hoang8f.widget.FButton
                     android:id="@+id/btnUpload"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_margin="7dp"
+                    android:layout_weight="1"
                     android:text="Upload"
+                    android:textColor="@android:color/white"
+                    app:cornerRadius="5dp"
                     app:fButtonColor="@color/btnSignIn"
                     app:shadowColor="@android:color/black"
                     app:shadowEnabled="true"
-                    app:shadowHeight="5dp"
-                    app:cornerRadius="5dp"
-                    android:textColor="@android:color/white"
-                    android:layout_margin="7dp"/>
+                    app:shadowHeight="5dp" />
 
             </LinearLayout>
 

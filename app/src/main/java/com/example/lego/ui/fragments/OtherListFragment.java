@@ -23,11 +23,12 @@ import com.example.lego.interfaces.ItemClickListener;
 import com.example.lego.models.Category;
 import com.example.lego.ui.activities.Cart;
 import com.example.lego.ui.activities.FoodList;
-import com.example.lego.ui.activities.Home;
 import com.example.lego.ui.adapters.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -37,31 +38,31 @@ import butterknife.OnClick;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListFragment extends Fragment {
+public class OtherListFragment extends Fragment {
 
-    private static final String TAG = "ListFragment";
+    private static final String TAG = "OtherListFragment";
     @BindView(R.id.rv_menu)
     RecyclerView rvMenu;
+    @BindView(R.id.fab_cart)
+    CounterFab fabCart;
 
     FirebaseDatabase database;
     DatabaseReference category;
 
     FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter;
-    @BindView(R.id.fab)
-    CounterFab fab;
 
-    public ListFragment() {
+    public OtherListFragment() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_other_list, container, false);
         ButterKnife.bind(this, view);
 
-        Log.d(TAG, "onCreateView: ListFragment");
         return view;
     }
 
@@ -69,7 +70,6 @@ public class ListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Log.d(TAG, "onViewCreated: ListFragment");
         database = FirebaseDatabase.getInstance();
         category = database.getReference("Category");
 
@@ -104,13 +104,12 @@ public class ListFragment extends Fragment {
         rvMenu.setLayoutAnimation(controller);
 
         loadMenu();
-
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        fab.setCount(new Database(getContext()).getCarts().size());
+        fabCart.setCount(new Database(getContext()).getCarts().size());
     }
 
     private void loadMenu() {
@@ -121,7 +120,7 @@ public class ListFragment extends Fragment {
         rvMenu.scheduleLayoutAnimation();
     }
 
-    @OnClick(R.id.fab)
+    @OnClick(R.id.fab_cart)
     public void onViewClicked() {
         startActivity(new Intent(getContext(), Cart.class));
     }

@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.lego.Constant;
 import com.example.lego.R;
 import com.example.lego.database.Database;
 import com.example.lego.interfaces.ItemClickListener;
@@ -113,6 +114,7 @@ public class MyListFragment extends Fragment {
                     public void onClick(View view, int position, boolean isLongClick) {
                         Intent intent = new Intent(getContext(), FoodList.class);
                         intent.putExtra("CategoryId", adapter.getRef(position).getKey());
+                        intent.putExtra(Constant.MY_LIST, true);
                         startActivity(intent);
                     }
                 });

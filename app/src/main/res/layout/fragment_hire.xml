@@ -6,7 +6,7 @@
     tools:context=".ui.fragments.HireFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_order"
+        android:id="@+id/rv_hire"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/transparent" />

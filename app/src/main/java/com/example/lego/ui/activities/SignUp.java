@@ -45,12 +45,12 @@ public class SignUp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //add this code before setContentView
-        CalligraphyConfig.initDefault(
-                new CalligraphyConfig.Builder()
-                        .setDefaultFontPath("fonts/restaurant_font.otf")
-                        .setFontAttrId(R.attr.fontPath)
-                        .build()
-        );
+//        CalligraphyConfig.initDefault(
+//                new CalligraphyConfig.Builder()
+//                        .setDefaultFontPath("fonts/restaurant_font.otf")
+//                        .setFontAttrId(R.attr.fontPath)
+//                        .build()
+//        );
 
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);

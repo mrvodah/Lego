@@ -27,6 +27,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -146,6 +147,7 @@ public class Cart extends AppCompatActivity {
                                 String.valueOf(ntotal),
                                 "0",
                                 comment.getText().toString(),
+                                Util.dateFormat.format(new Date()),
                                 cart
                         );
 
@@ -180,7 +182,7 @@ public class Cart extends AppCompatActivity {
         for (Order order : cart)
             ntotal += Integer.parseInt(order.getPrice()) * Integer.parseInt(order.getQuantity());
 
-        Locale locale = new Locale("en", "US");
+        Locale locale = Locale.getDefault();
         NumberFormat format = NumberFormat.getCurrencyInstance(locale);
         total.setText(format.format(ntotal));
         swipeLayout.setRefreshing(false);

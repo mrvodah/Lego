@@ -84,7 +84,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
 
-        TextView name, price;
+        TextView name, price, time;
         ImageView cart_count;
         ElegantNumberButton btn_quantity;
 
@@ -93,6 +93,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
             name = itemView.findViewById(R.id.cart_item_name);
             price = itemView.findViewById(R.id.cart_item_price);
+            time = itemView.findViewById(R.id.cart_item_time);
             btn_quantity = itemView.findViewById(R.id.btn_quantity);
             cart_count = itemView.findViewById(R.id.cart_item_count);
 
@@ -109,6 +110,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             NumberFormat format = NumberFormat.getCurrencyInstance(locale);;
             int nprice = Integer.parseInt(order.getPrice()) * Integer.parseInt(order.getQuantity());
             price.setText(format.format(nprice));
+
+            time.setText("Thời gian thuê: " + order.getStartDate() + " - " + order.getEndDate());
 
             name.setText(order.getProductName());
 

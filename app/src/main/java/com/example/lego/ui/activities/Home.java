@@ -1,17 +1,13 @@
 package com.example.lego.ui.activities;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,46 +19,26 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.ListFragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.andremion.counterfab.CounterFab;
 import com.example.lego.Constant;
 import com.example.lego.R;
-import com.example.lego.services.ListenOrder;
 import com.example.lego.ui.fragments.MyListFragment;
+import com.example.lego.ui.fragments.OtherListFragment;
 import com.example.lego.utils.Util;
-import com.example.lego.database.Database;
-import com.example.lego.interfaces.ItemClickListener;
-import com.example.lego.models.Category;
-import com.example.lego.services.ListenDialog;
-import com.example.lego.ui.adapters.MenuViewHolder;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.rengwuxian.materialedittext.MaterialEditText;
-import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import info.hoang8f.widget.FButton;
 import io.paperdb.Paper;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Home extends AppCompatActivity
@@ -87,12 +63,12 @@ public class Home extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         //add this code before setContentView
-        CalligraphyConfig.initDefault(
-                new CalligraphyConfig.Builder()
-                        .setDefaultFontPath("fonts/restaurant_font.otf")
-                        .setFontAttrId(R.attr.fontPath)
-                        .build()
-        );
+//        CalligraphyConfig.initDefault(
+//                new CalligraphyConfig.Builder()
+//                        .setDefaultFontPath("fonts/restaurant_font.otf")
+//                        .setFontAttrId(R.attr.fontPath)
+//                        .build()
+//        );
 
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
@@ -128,7 +104,7 @@ public class Home extends AppCompatActivity
 //        Intent serviceOrder = new Intent(Home.this, ListenOrder.class);
 //        startService(serviceOrder);
 
-        loadContent(Constant.FRAGMENT_LIST);
+        loadContent(Constant.FRAGMENT_OTHER_LIST);
 //        loadContent(Constant.FRAGMENT_MY_LIST);
     }
 
@@ -148,10 +124,10 @@ public class Home extends AppCompatActivity
 
         switch (id) {
             case R.id.nav_1:
-                loadContent(Constant.FRAGMENT_LIST);
+                loadContent(Constant.FRAGMENT_OTHER_LIST);
                 break;
             case R.id.nav_2:
-
+                loadContent(Constant.FRAGMENT_MY_LIST);
                 break;
             case R.id.nav_3:
 
@@ -251,8 +227,8 @@ public class Home extends AppCompatActivity
         Fragment fragment = new Fragment();
         Log.d(TAG, "loadContent: " + fragmentList);
         switch (fragmentList){
-            case Constant.FRAGMENT_LIST:
-                fragment = new ListFragment();
+            case Constant.FRAGMENT_OTHER_LIST:
+                fragment = new OtherListFragment();
                 break;
             case Constant.FRAGMENT_MY_LIST:
                 fragment = new MyListFragment();
@@ -262,7 +238,6 @@ public class Home extends AppCompatActivity
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.rl_container, fragment)
-                .addToBackStack(null)
                 .commit();
 
     }

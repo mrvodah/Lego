@@ -13,19 +13,19 @@ import com.example.lego.R;
  * Created by VietVan on 06/06/2018.
  */
 
-public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public ImageView food_image, fav_image, cart_image;
-    public TextView food_name, food_price;
+    public ImageView product_image, fav_image, cart_image;
+    public TextView product_name, product_price;
 
     ItemClickListener itemClickListener;
 
-    public FoodViewHolder(View itemView) {
+    public ProductViewHolder(View itemView) {
         super(itemView);
 
-        food_image = itemView.findViewById(R.id.food_image);
-        food_name = itemView.findViewById(R.id.food_name);
-        food_price = itemView.findViewById(R.id.food_price);
+        product_image = itemView.findViewById(R.id.product_image);
+        product_name = itemView.findViewById(R.id.product_name);
+        product_price = itemView.findViewById(R.id.product_price);
         fav_image = itemView.findViewById(R.id.fav);
         cart_image = itemView.findViewById(R.id.iv_cart);
 
@@ -34,11 +34,11 @@ public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     }
 
     public ImageView getFood_image() {
-        return food_image;
+        return product_image;
     }
 
-    public void setFood_image(ImageView food_image) {
-        this.food_image = food_image;
+    public void setFood_image(ImageView product_image) {
+        this.product_image = product_image;
     }
 
     public ImageView getFav_image() {
@@ -58,19 +58,19 @@ public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     }
 
     public TextView getFood_name() {
-        return food_name;
+        return product_name;
     }
 
-    public void setFood_name(TextView food_name) {
-        this.food_name = food_name;
+    public void setFood_name(TextView product_name) {
+        this.product_name = product_name;
     }
 
     public TextView getFood_price() {
-        return food_price;
+        return product_price;
     }
 
-    public void setFood_price(TextView food_price) {
-        this.food_price = food_price;
+    public void setFood_price(TextView product_price) {
+        this.product_price = product_price;
     }
 
     public void setItemClickListener(ItemClickListener itemClickListener) {

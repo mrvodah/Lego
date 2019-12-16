@@ -7,6 +7,8 @@ import android.net.NetworkInfo;
 import com.example.lego.models.Request;
 import com.example.lego.models.User;
 
+import java.text.SimpleDateFormat;
+
 /**
  * Created by VietVan on 29/05/2018.
  */
@@ -20,6 +22,8 @@ public class Util {
     public static String PW_KEY = "PASSWORD";
 
     public static String UPDATE = "UPDATE";
+
+    public static SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
     public static String convertCodeToStatus(String code){
         if(code.equals("0"))

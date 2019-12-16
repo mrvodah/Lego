@@ -13,20 +13,32 @@ public class Request{
     public String total;
     public String status;
     public String comment;
+    public String startDate;
     public List<Order> list;
 
     public Request() {
     }
 
-    public Request(String phone, String name, String address, String total, String status, String comment, List<Order> list) {
+    public Request(String phone, String name, String address, String total, String status, String comment, String startDate, List<Order> list) {
         this.phone = phone;
         this.name = name;
         this.address = address;
         this.total = total;
         this.status = status;
         this.comment = comment;
+        this.startDate = startDate;
         this.list = list;
     }
+
+//    public Request(String phone, String name, String address, String total, String status, String comment, List<Order> list) {
+//        this.phone = phone;
+//        this.name = name;
+//        this.address = address;
+//        this.total = total;
+//        this.status = status;
+//        this.comment = comment;
+//        this.list = list;
+//    }
 
     public String getComment() {
         return comment;
@@ -82,5 +94,27 @@ public class Request{
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Request{" +
+                "phone='" + phone + '\'' +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", total='" + total + '\'' +
+                ", status='" + status + '\'' +
+                ", comment='" + comment + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", list=" + list +
+                '}';
     }
 }
