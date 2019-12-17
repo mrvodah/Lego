@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Quản ly sản phẩm">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_staff_1"
+                    android:icon="@drawable/ic_restaurant_black_24dp"
+                    android:iconTint="@color/white"
+                    android:title="Danh sách lego"/>
+
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Quản lý đơn hàng">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_staff_3"
+                    android:icon="@drawable/ic_restaurant_black_24dp"
+                    android:iconTint="@color/white"
+                    android:title="Danh sách đơn thuê"/>
+
+                <item
+                    android:id="@+id/nav_staff_4"
+                    android:icon="@drawable/ic_restaurant_black_24dp"
+                    android:iconTint="@color/white"
+                    android:title="Danh sách đơn bán"/>
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Trợ giúp">
+        <menu>
+            <group android:checkableBehavior="single">
+
+                <item
+                    android:id="@+id/nav_staff_5"
+                    android:icon="@drawable/ic_security_black_24dp"
+                    android:iconTint="@android:color/white"
+                    android:title="Change Password" />
+
+                <item
+                    android:id="@+id/nav_staff_6"
+                    android:icon="@drawable/ic_exit_to_app_black_24dp"
+                    android:iconTint="@android:color/white"
+                    android:title="Sign out" />
+
+            </group>
+        </menu>
+    </item>
+
+</menu>

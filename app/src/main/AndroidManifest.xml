@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
+        <activity android:name=".ui.activities.HomeStaffActivity"></activity>
         <activity android:name=".ui.activities.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,12 +37,10 @@
             android:name=".services.ListenDialog"
             android:enabled="true"
             android:exported="true" />
-
         <service
             android:name=".services.ListenOrder"
             android:enabled="true"
             android:exported="true" />
-
     </application>
 
 </manifest>

@@ -49,7 +49,6 @@ public class Home extends AppCompatActivity
     private static final String TAG = "TAG";
     FirebaseDatabase database;
     DatabaseReference user;
-    StorageReference storageReference;
 
     TextView tvFullName;
 
@@ -81,7 +80,6 @@ public class Home extends AppCompatActivity
         //init firebase
         database = FirebaseDatabase.getInstance();
         user = database.getReference("User");
-        storageReference = FirebaseStorage.getInstance().getReference();
 
         //init paper
         Paper.init(this);
