@@ -65,7 +65,7 @@ public class FoodList extends AppCompatActivity {
     @BindView(R.id.swipe_layout)
     SwipeRefreshLayout swipeLayout;
     @BindView(R.id.rv_product)
-    RecyclerView rvFoodlist;
+    RecyclerView rvProduct;
 
     @BindView(R.id.searchBar)
     MaterialSearchBar searchBar;
@@ -140,13 +140,13 @@ public class FoodList extends AppCompatActivity {
 
         // load menu
         layoutManager = new LinearLayoutManager(this);
-        rvFoodlist.setHasFixedSize(true);
-        rvFoodlist.setLayoutManager(layoutManager);
+        rvProduct.setHasFixedSize(true);
+        rvProduct.setLayoutManager(layoutManager);
 
         // get Intent
         if (getIntent() != null) {
             categoryId = getIntent().getStringExtra("CategoryId");
-            loadListFood();
+            loadListProduct();
         }
 
         // init swipe
@@ -159,7 +159,7 @@ public class FoodList extends AppCompatActivity {
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadListFood();
+                loadListProduct();
             }
         });
 
@@ -167,7 +167,7 @@ public class FoodList extends AppCompatActivity {
         swipeLayout.post(new Runnable() {
             @Override
             public void run() {
-                loadListFood();
+                loadListProduct();
             }
         });
 
@@ -203,7 +203,7 @@ public class FoodList extends AppCompatActivity {
                 //When search bar is close
                 //Restore origin adapter
                 if (!enabled)
-                    rvFoodlist.setAdapter(adapter);
+                    rvProduct.setAdapter(adapter);
             }
 
             @Override
@@ -342,7 +342,7 @@ public class FoodList extends AppCompatActivity {
             }
         };
 
-        rvFoodlist.setAdapter(searchAdapter);
+        rvProduct.setAdapter(searchAdapter);
     }
 
     private void loadSuggest() {
@@ -366,7 +366,7 @@ public class FoodList extends AppCompatActivity {
                 });
     }
 
-    private void loadListFood() {
+    private void loadListProduct() {
         adapter = new FirebaseRecyclerAdapter<Product, ProductViewHolder>(
                 Product.class,
                 R.layout.product_item,
@@ -487,7 +487,7 @@ public class FoodList extends AppCompatActivity {
             }
         };
 
-        rvFoodlist.setAdapter(adapter);
+        rvProduct.setAdapter(adapter);
         swipeLayout.setRefreshing(false);
     }
 

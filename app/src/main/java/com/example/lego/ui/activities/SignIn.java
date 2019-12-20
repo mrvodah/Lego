@@ -103,10 +103,14 @@ public class SignIn extends AppCompatActivity {
 
                         if (user.getPassword().equals(edtPassword.getText().toString())) {
                             Util.currentUser = user;
-                            Log.d(TAG, "onDataChange: " + user);
-                            startActivity(new Intent(SignIn.this, Home.class));
-                            finish();
-
+                            if(Boolean.parseBoolean(user.getIsStaff())){
+                                startActivity(new Intent(SignIn.this, HomeStaffActivity.class));
+                                finish();
+                            }
+                            else{
+                                startActivity(new Intent(SignIn.this, Home.class));
+                                finish();
+                            }
                             table_user.removeEventListener(this);
 
                         } else {

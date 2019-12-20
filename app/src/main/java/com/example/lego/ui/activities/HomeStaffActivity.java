@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -16,6 +18,11 @@ import android.widget.TextView;
 import com.example.lego.Constant;
 import com.example.lego.R;
 import com.example.lego.services.ListenOrder;
+import com.example.lego.ui.fragments.HireFragment;
+import com.example.lego.ui.fragments.ListStaffFragment;
+import com.example.lego.ui.fragments.MyListFragment;
+import com.example.lego.ui.fragments.OtherListFragment;
+import com.example.lego.ui.fragments.SellFragment;
 import com.example.lego.utils.Util;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
@@ -71,7 +78,7 @@ public class HomeStaffActivity extends AppCompatActivity
         Intent serviceOrder = new Intent(this, ListenOrder.class);
         startService(serviceOrder);
 
-//        loadContent(Constant.FRAGMENT_OTHER_LIST);
+        loadContent(Constant.FRAGMENT_LIST_STAFF);
 
     }
 
@@ -84,6 +91,21 @@ public class HomeStaffActivity extends AppCompatActivity
         }
     }
 
+    private void loadContent(int fragmentList) {
+        Fragment fragment = new Fragment();
+        Log.d(TAG, "loadContent: " + fragmentList);
+        switch (fragmentList) {
+            case Constant.FRAGMENT_LIST_STAFF:
+                fragment = new ListStaffFragment();
+                break;
+        }
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.rl_container, fragment)
+                .commit();
+
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

@@ -7,4 +7,5 @@ public interface Constant {
     String MY_LIST = "my_list";
     int FRAGMENT_HIRE_LIST = 3;
     int FRAGMENT_SELL_LIST = 4;
+    int FRAGMENT_LIST_STAFF = 5;
 }

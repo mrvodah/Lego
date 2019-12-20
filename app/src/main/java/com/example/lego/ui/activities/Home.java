@@ -203,7 +203,7 @@ public class Home extends AppCompatActivity
                 //Delete rememeber user & pwd
                 Paper.book().destroy();
 
-                Intent intent = new Intent(Home.this, SignIn.class);
+                Intent intent = new Intent(Home.this, SplashScreen.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
