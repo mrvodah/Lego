@@ -3,11 +3,6 @@ package com.example.lego.ui.fragments;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +10,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.lego.R;
 import com.example.lego.models.Product;
@@ -41,9 +42,9 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListStaffFragment extends Fragment {
+public class SellStaffFragment extends Fragment {
 
-    private static final String TAG = "ListStaffFragment";
+    private static final String TAG = "SellStaffFragment";
     @BindView(R.id.searchBar)
     MaterialSearchBar searchBar;
     @BindView(R.id.rv_product)
@@ -57,14 +58,14 @@ public class ListStaffFragment extends Fragment {
     StorageReference storageReference;
 
     DatabaseReference productList;
-    DatabaseReference productWaitList;
+    DatabaseReference productListItem;
     FirebaseRecyclerAdapter<Product, ProductViewHolderStaff> adapter;
 
     // search functionality
     FirebaseRecyclerAdapter<Product, ProductViewHolderStaff> searchAdapter;
     List<String> suggestList = new ArrayList<>();
 
-    public ListStaffFragment() {
+    public SellStaffFragment() {
         // Required empty public constructor
     }
 
@@ -73,7 +74,7 @@ public class ListStaffFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_list_staff, container, false);
+        View view = inflater.inflate(R.layout.fragment_sell_staff, container, false);
         ButterKnife.bind(this, view);
 
         return view;
@@ -84,8 +85,8 @@ public class ListStaffFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         database = FirebaseDatabase.getInstance();
-        productList = database.getReference("Product");
-        productWaitList = database.getReference("ProductWait");
+        productList = database.getReference("ProductWait");
+        productListItem = database.getReference("Product");
         storageReference = FirebaseStorage.getInstance().getReference();
 
         // load menu
@@ -182,6 +183,8 @@ public class ListStaffFragment extends Fragment {
                 viewHolder.getProduct_price().setText(model.getPrice());
                 viewHolder.getProduct_number().setText("Số sản phẩm: " + model.getRemain() + "/" + model.getTotal());
 
+                viewHolder.getBtnEdit().setText("Confirm");
+
                 viewHolder.getBtnEdit().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -246,18 +249,14 @@ public class ListStaffFragment extends Fragment {
                 viewHolder.getProduct_price().setText(model.getPrice());
                 viewHolder.getProduct_number().setText("Số sản phẩm: " + model.getRemain() + "/" + model.getTotal());
 
+                viewHolder.getBtnEdit().setText("Confirm");
+
                 viewHolder.getBtnEdit().setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Product item = adapter.getItem(position);
-                        DialogUtil.showDialogAskSubmit(getContext(), model.getRemain(), model.getTotal(), new DialogUtil.OnClickListener() {
-                            @Override
-                            public void onClickPositive(Dialog dialog, String remain, String total) {
-                                item.setRemain(Integer.parseInt(remain));
-                                item.setTotal(Integer.parseInt(total));
-                                productList.child(adapter.getRef(position).getKey()).setValue(item);
-                            }
-                        });
+                        Product product = adapter.getItem(position);
+                        productListItem.push().setValue(product);
+                        productList.child(adapter.getRef(position).getKey()).removeValue();
                     }
                 });
 

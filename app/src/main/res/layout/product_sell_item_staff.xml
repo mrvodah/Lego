@@ -37,7 +37,7 @@
                     android:id="@+id/product_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="5"
+                    android:layout_weight="6"
                     android:paddingLeft="11dp"
                     android:text="Name of Menu"
                     android:textAlignment="textStart"
@@ -67,7 +67,7 @@
                     android:id="@+id/product_price"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="5"
+                    android:layout_weight="6"
                     android:paddingLeft="11dp"
                     android:text="$1000"
                     android:textAlignment="textStart"
@@ -95,7 +95,7 @@
 
                 <info.hoang8f.widget.FButton
                     android:id="@+id/btnEdit"
-                    android:text="EDIT"
+                    android:text="APPROVE"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     app:fButtonColor="@color/white"
@@ -104,7 +104,7 @@
 
                 <info.hoang8f.widget.FButton
                     android:id="@+id/btnRemove"
-                    android:text="REMOVE"
+                    android:text="DENY"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     app:fButtonColor="@color/white"

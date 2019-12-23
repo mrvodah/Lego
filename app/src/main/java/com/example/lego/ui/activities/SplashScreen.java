@@ -85,8 +85,15 @@ public class SplashScreen extends AppCompatActivity {
                         if (user.getPassword().equals(pwd)) {
                             Util.currentUser = user;
                             Log.d("Splash", "onDataChange: " + user);
-                            startActivity(new Intent(SplashScreen.this, Home.class));
-                            finish();
+                            if(Boolean.parseBoolean(user.getIsStaff())){
+                                startActivity(new Intent(SplashScreen.this, HomeStaffActivity.class));
+                                finish();
+                            }
+                            else{
+                                startActivity(new Intent(SplashScreen.this, Home.class));
+                                finish();
+                            }
+
                         } else {
                             Toast.makeText(SplashScreen.this, "Sign in failed!", Toast.LENGTH_SHORT).show();
                         }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/edtContain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Remain Product"
+        android:inputType="text"
+        android:textSize="33sp"
+        app:met_floatingLabel="highlight"
+        app:met_singleLineEllipsis="true" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/edtTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Total Product"
+        android:inputType="text"
+        android:textSize="33sp"
+        app:met_floatingLabel="highlight"
+        app:met_singleLineEllipsis="true" />
+
+    <info.hoang8f.widget.FButton
+        android:id="@+id/si_btnConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:text="Confirm"
+        android:textColor="@color/colorPrimary"
+        app:cornerRadius="5dp"
+        app:fButtonColor="@android:color/white"
+        app:shadowColor="@android:color/black"
+        app:shadowEnabled="true"
+        app:shadowHeight="5dp" />
+
+</LinearLayout>
