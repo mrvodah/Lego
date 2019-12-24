@@ -9,8 +9,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="15dp"
-        tools:context="com.example.vietvan.orderfood.Cart">
+        android:padding="15dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/listCart"

@@ -170,7 +170,7 @@ public class SellStaffFragment extends Fragment {
 
         searchAdapter = new FirebaseRecyclerAdapter<Product, ProductViewHolderStaff>(
                 Product.class,
-                R.layout.product_item_staff,
+                R.layout.product_sell_item_staff,
                 ProductViewHolderStaff.class,
                 productList.orderByChild("name").equalTo(text.toString())
         ) {
@@ -181,7 +181,7 @@ public class SellStaffFragment extends Fragment {
 
                 viewHolder.getProduct_phone().setText("Người bán: " + model.getPhone());
                 viewHolder.getProduct_price().setText(model.getPrice());
-                viewHolder.getProduct_number().setText("Số sản phẩm: " + model.getRemain() + "/" + model.getTotal());
+                viewHolder.getProduct_number().setText("SP: " + model.getRemain() + "/" + model.getTotal());
 
                 viewHolder.getBtnEdit().setText("Confirm");
 
@@ -236,7 +236,7 @@ public class SellStaffFragment extends Fragment {
     private void loadListProduct() {
         adapter = new FirebaseRecyclerAdapter<Product, ProductViewHolderStaff>(
                 Product.class,
-                R.layout.product_item_staff,
+                R.layout.product_sell_item_staff,
                 ProductViewHolderStaff.class,
                 productList
         ) {
@@ -247,7 +247,7 @@ public class SellStaffFragment extends Fragment {
 
                 viewHolder.getProduct_phone().setText("Người bán: " + model.getPhone());
                 viewHolder.getProduct_price().setText(model.getPrice());
-                viewHolder.getProduct_number().setText("Số sản phẩm: " + model.getRemain() + "/" + model.getTotal());
+                viewHolder.getProduct_number().setText("SP: " + model.getRemain() + "/" + model.getTotal());
 
                 viewHolder.getBtnEdit().setText("Confirm");
 

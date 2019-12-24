@@ -27,8 +27,8 @@
             android:name=".ui.activities.Home"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ui.activities.FoodList" />
-        <activity android:name=".ui.activities.FoodDetail" />
+        <activity android:name=".ui.activities.ProductList" />
+        <activity android:name=".ui.activities.ProductDetail" />
         <activity android:name=".ui.activities.Cart" />
         <activity android:name=".ui.activities.OrderStatus" />
         <activity android:name=".ui.activities.OrderDetail" />

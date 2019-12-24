@@ -33,7 +33,7 @@
                     android:gravity="center_vertical|start"
                     android:textAllCaps="true"
                     android:textStyle="bold"
-                    android:text="Food 1"
+                    android:text="Product 1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

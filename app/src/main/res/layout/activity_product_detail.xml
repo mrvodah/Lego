@@ -34,7 +34,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="parallax"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:title="Food Name" />
+                app:title="Product Name" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -94,7 +94,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="7dp"
                         android:padding="13dp"
-                        android:text="Food Name"
+                        android:text="Product Name"
                         android:textColor="@color/colorPrimary"
                         android:textSize="21sp"
                         android:textStyle="bold" />

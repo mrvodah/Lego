@@ -44,7 +44,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class FoodDetail extends AppCompatActivity implements RatingDialogListener {
+public class ProductDetail extends AppCompatActivity implements RatingDialogListener {
 
     private static final String TAG = "TAG";
     @BindView(R.id.img_product)
@@ -118,7 +118,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
             @Override
             public void onClick(View v) {
                 if(Integer.valueOf(numberButton.getNumber()) > currentFood.getRemain()){
-                    Toast.makeText(FoodDetail.this, "Số sản phẩm còn lại không đủ!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProductDetail.this, "Số sản phẩm còn lại không đủ!", Toast.LENGTH_SHORT).show();
                 }
                 else{
 
@@ -131,7 +131,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                             dateFormat.format(new Date()),
                             dateFormat.format(endDate.getTime())
                     ));
-                    Toast.makeText(FoodDetail.this, "Added to Cart!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProductDetail.this, "Added to Cart!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -232,7 +232,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                 .setCommentTextColor(android.R.color.white)
                 .setCommentBackgroundColor(R.color.colorPrimaryDark)
                 .setWindowAnimation(R.style.RatingDialogFadeAnim)
-                .create(FoodDetail.this)
+                .create(ProductDetail.this)
                 .show();
     }
 
@@ -256,7 +256,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                 else
                     ratingTbl.child(productId).setValue(rating);
 
-                Toast.makeText(FoodDetail.this, "Thank yu for submit rating!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProductDetail.this, "Thank yu for submit rating!", Toast.LENGTH_SHORT).show();
                 ratingTbl.removeEventListener(this);
             }
 

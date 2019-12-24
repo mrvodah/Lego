@@ -15,8 +15,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_margin="5dp"
-            app:mt_hint="Enter your food"
-            app:mt_placeholder="Enter your food ..."
+            app:mt_hint="Enter your product"
+            app:mt_placeholder="Enter your product..."
             app:mt_speechMode="false" />
 
         <androidx.recyclerview.widget.RecyclerView

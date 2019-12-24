@@ -35,7 +35,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import info.hoang8f.widget.FButton;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Cart extends AppCompatActivity {
@@ -95,7 +94,7 @@ public class Cart extends AppCompatActivity {
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                loadListFood();
+                loadListProduct();
             }
         });
 
@@ -103,7 +102,7 @@ public class Cart extends AppCompatActivity {
         swipeLayout.post(new Runnable() {
             @Override
             public void run() {
-                loadListFood();
+                loadListProduct();
             }
         });
 
@@ -172,7 +171,7 @@ public class Cart extends AppCompatActivity {
 
     }
 
-    private void loadListFood() {
+    private void loadListProduct() {
 
         cart = new Database(this).getCarts();
         listCart.setAdapter(new CartAdapter(cart, this));
@@ -215,6 +214,6 @@ public class Cart extends AppCompatActivity {
         for (Order item : cart)
             new Database(this).addToCart(item);
 
-        loadListFood();
+        loadListProduct();
     }
 }

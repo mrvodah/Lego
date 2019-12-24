@@ -1,12 +1,10 @@
 package com.example.lego.ui.fragments;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,21 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.lego.R;
-import com.example.lego.database.Database;
 import com.example.lego.interfaces.ItemClickListener;
-import com.example.lego.models.Order;
 import com.example.lego.models.Product;
-import com.example.lego.ui.activities.FoodDetail;
-import com.example.lego.ui.activities.FoodList;
-import com.example.lego.ui.adapters.ProductViewHolder;
 import com.example.lego.ui.adapters.ProductWaitViewHolder;
 import com.example.lego.utils.Util;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
-
-import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -105,8 +96,8 @@ public class SellFragment extends Fragment {
         ) {
             @Override
             protected void populateViewHolder(final ProductWaitViewHolder viewHolder, final Product model, final int position) {
-                viewHolder.getFood_name().setText(model.getName());
-                Picasso.get().load(model.getImage()).into(viewHolder.getFood_image());
+                viewHolder.getProduct_name().setText(model.getName());
+                Picasso.get().load(model.getImage()).into(viewHolder.getProduct_image());
 
                 viewHolder.getProduct_delete().setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -16,7 +16,7 @@ import com.example.lego.R;
 public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     public ImageView product_image, fav_image, cart_image;
-    public TextView product_name, product_price;
+    public TextView product_name, product_price, product_own;
 
     ItemClickListener itemClickListener;
 
@@ -26,6 +26,7 @@ public class ProductViewHolder extends RecyclerView.ViewHolder implements View.O
         product_image = itemView.findViewById(R.id.product_image);
         product_name = itemView.findViewById(R.id.product_name);
         product_price = itemView.findViewById(R.id.product_price);
+        product_own = itemView.findViewById(R.id.product_own);
         fav_image = itemView.findViewById(R.id.fav);
         cart_image = itemView.findViewById(R.id.iv_cart);
 
@@ -33,12 +34,8 @@ public class ProductViewHolder extends RecyclerView.ViewHolder implements View.O
 
     }
 
-    public ImageView getFood_image() {
+    public ImageView getProduct_image() {
         return product_image;
-    }
-
-    public void setFood_image(ImageView product_image) {
-        this.product_image = product_image;
     }
 
     public ImageView getFav_image() {
@@ -57,20 +54,24 @@ public class ProductViewHolder extends RecyclerView.ViewHolder implements View.O
         this.cart_image = cart_image;
     }
 
-    public TextView getFood_name() {
+    public TextView getProduct_name() {
         return product_name;
     }
 
-    public void setFood_name(TextView product_name) {
-        this.product_name = product_name;
-    }
-
-    public TextView getFood_price() {
+    public TextView getProduct_price() {
         return product_price;
     }
 
-    public void setFood_price(TextView product_price) {
+    public void setProduct_price(TextView product_price) {
         this.product_price = product_price;
+    }
+
+    public TextView getProduct_own() {
+        return product_own;
+    }
+
+    public void setProduct_own(TextView product_own) {
+        this.product_own = product_own;
     }
 
     public void setItemClickListener(ItemClickListener itemClickListener) {

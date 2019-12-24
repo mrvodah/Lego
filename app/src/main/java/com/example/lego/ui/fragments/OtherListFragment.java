@@ -22,13 +22,11 @@ import com.example.lego.database.Database;
 import com.example.lego.interfaces.ItemClickListener;
 import com.example.lego.models.Category;
 import com.example.lego.ui.activities.Cart;
-import com.example.lego.ui.activities.FoodList;
+import com.example.lego.ui.activities.ProductList;
 import com.example.lego.ui.adapters.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
@@ -88,7 +86,7 @@ public class OtherListFragment extends Fragment {
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Intent intent = new Intent(getContext(), FoodList.class);
+                        Intent intent = new Intent(getContext(), ProductList.class);
                         intent.putExtra("CategoryId", adapter.getRef(position).getKey());
                         startActivity(intent);
                     }

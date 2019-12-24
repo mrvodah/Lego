@@ -180,7 +180,7 @@ public class ListStaffFragment extends Fragment {
 
                 viewHolder.getProduct_phone().setText("Người bán: " + model.getPhone());
                 viewHolder.getProduct_price().setText(model.getPrice());
-                viewHolder.getProduct_number().setText("Số sản phẩm: " + model.getRemain() + "/" + model.getTotal());
+                viewHolder.getProduct_number().setText("SP: " + model.getRemain() + "/" + model.getTotal());
 
                 viewHolder.getBtnEdit().setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -244,7 +244,7 @@ public class ListStaffFragment extends Fragment {
 
                 viewHolder.getProduct_phone().setText("Người bán: " + model.getPhone());
                 viewHolder.getProduct_price().setText(model.getPrice());
-                viewHolder.getProduct_number().setText("Số sản phẩm: " + model.getRemain() + "/" + model.getTotal());
+                viewHolder.getProduct_number().setText("SP: " + model.getRemain() + "/" + model.getTotal());
 
                 viewHolder.getBtnEdit().setOnClickListener(new View.OnClickListener() {
                     @Override

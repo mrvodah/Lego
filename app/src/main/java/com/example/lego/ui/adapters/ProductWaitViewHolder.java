@@ -32,28 +32,12 @@ public class ProductWaitViewHolder extends RecyclerView.ViewHolder implements Vi
 
     }
 
-    public ImageView getFood_image() {
+    public ImageView getProduct_image() {
         return product_image;
     }
 
-    public void setFood_image(ImageView product_image) {
-        this.product_image = product_image;
-    }
-
-    public TextView getFood_name() {
+    public TextView getProduct_name() {
         return product_name;
-    }
-
-    public void setFood_name(TextView product_name) {
-        this.product_name = product_name;
-    }
-
-    public TextView getFood_price() {
-        return product_price;
-    }
-
-    public void setFood_price(TextView product_price) {
-        this.product_price = product_price;
     }
 
     public ImageView getProduct_delete() {

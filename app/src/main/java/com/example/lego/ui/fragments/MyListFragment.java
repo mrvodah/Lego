@@ -25,11 +25,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lego.Constant;
 import com.example.lego.R;
-import com.example.lego.database.Database;
 import com.example.lego.interfaces.ItemClickListener;
 import com.example.lego.models.Category;
-import com.example.lego.ui.activities.FoodList;
-import com.example.lego.ui.activities.Home;
+import com.example.lego.ui.activities.ProductList;
 import com.example.lego.ui.adapters.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -118,7 +116,7 @@ public class MyListFragment extends Fragment {
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Intent intent = new Intent(getContext(), FoodList.class);
+                        Intent intent = new Intent(getContext(), ProductList.class);
                         intent.putExtra("CategoryId", adapter.getRef(position).getKey());
                         intent.putExtra(Constant.MY_LIST, true);
                         startActivity(intent);

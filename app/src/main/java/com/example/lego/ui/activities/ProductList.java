@@ -59,7 +59,7 @@ import butterknife.OnClick;
 import info.hoang8f.widget.FButton;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class FoodList extends AppCompatActivity {
+public class ProductList extends AppCompatActivity {
 
     private static final String TAG = "TAG";
     @BindView(R.id.swipe_layout)
@@ -88,7 +88,7 @@ public class FoodList extends AppCompatActivity {
     TextView name, description, price, discount, number;
     FButton select, upload;
 
-    Product newFood;
+    Product newProduct;
     Uri saveUri;
     public final int PICK_IMAGE_REQUEST = 11;
 
@@ -235,8 +235,10 @@ public class FoodList extends AppCompatActivity {
 
                     if(model.getPhone().equals(Util.currentUser.getPhone())){
 
-                        viewHolder.getFood_name().setText(model.getName());
-                        Picasso.get().load(model.getImage()).into(viewHolder.getFood_image());
+                        viewHolder.getProduct_name().setText(model.getName());
+                        viewHolder.getProduct_own().setText(model.getPhone());
+                        viewHolder.getProduct_price().setText(model.getPrice() + "$");
+                        Picasso.get().load(model.getImage()).into(viewHolder.getProduct_image());
 
                         //Add Favorites
                         if (localDB.isFavorite(adapter.getRef(position).getKey()))
@@ -251,11 +253,11 @@ public class FoodList extends AppCompatActivity {
                                 if (!localDB.isFavorite(adapter.getRef(position).getKey())) {
                                     localDB.addToFavorites(adapter.getRef(position).getKey());
                                     viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_black_24dp);
-                                    Toast.makeText(FoodList.this, model.getName() + " was added to Favorites!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ProductList.this, model.getName() + " was added to Favorites!", Toast.LENGTH_SHORT).show();
                                 } else {
                                     localDB.removeFromFavorites(adapter.getRef(position).getKey());
                                     viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                                    Toast.makeText(FoodList.this, model.getName() + " was removed from Favorites!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ProductList.this, model.getName() + " was removed from Favorites!", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -273,14 +275,14 @@ public class FoodList extends AppCompatActivity {
                                         Util.dateFormat.format(endDate.getTime())
 
                                 ));
-                                Toast.makeText(FoodList.this, "Added to Cart!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ProductList.this, "Added to Cart!", Toast.LENGTH_SHORT).show();
                             }
                         });
 
                         viewHolder.setItemClickListener(new ItemClickListener() {
                             @Override
                             public void onClick(View view, int position, boolean isLongClick) {
-                                Intent intent = new Intent(FoodList.this, FoodDetail.class);
+                                Intent intent = new Intent(ProductList.this, ProductDetail.class);
                                 intent.putExtra("ProductId", searchAdapter.getRef(position).getKey());
                                 startActivity(intent);
                             }
@@ -288,8 +290,10 @@ public class FoodList extends AppCompatActivity {
                     }
                 }
                 else{
-                    viewHolder.getFood_name().setText(model.getName());
-                    Picasso.get().load(model.getImage()).into(viewHolder.getFood_image());
+                    viewHolder.getProduct_name().setText(model.getName());
+                    viewHolder.getProduct_own().setText(model.getPhone());
+                    viewHolder.getProduct_price().setText(model.getPrice() + "$");
+                    Picasso.get().load(model.getImage()).into(viewHolder.getProduct_image());
 
                     //Add Favorites
                     if (localDB.isFavorite(adapter.getRef(position).getKey()))
@@ -304,11 +308,11 @@ public class FoodList extends AppCompatActivity {
                             if (!localDB.isFavorite(adapter.getRef(position).getKey())) {
                                 localDB.addToFavorites(adapter.getRef(position).getKey());
                                 viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_black_24dp);
-                                Toast.makeText(FoodList.this, model.getName() + " was added to Favorites!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ProductList.this, model.getName() + " was added to Favorites!", Toast.LENGTH_SHORT).show();
                             } else {
                                 localDB.removeFromFavorites(adapter.getRef(position).getKey());
                                 viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                                Toast.makeText(FoodList.this, model.getName() + " was removed from Favorites!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ProductList.this, model.getName() + " was removed from Favorites!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -326,14 +330,14 @@ public class FoodList extends AppCompatActivity {
                                     Util.dateFormat.format(endDate.getTime())
 
                             ));
-                            Toast.makeText(FoodList.this, "Added to Cart!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProductList.this, "Added to Cart!", Toast.LENGTH_SHORT).show();
                         }
                     });
 
                     viewHolder.setItemClickListener(new ItemClickListener() {
                         @Override
                         public void onClick(View view, int position, boolean isLongClick) {
-                            Intent intent = new Intent(FoodList.this, FoodDetail.class);
+                            Intent intent = new Intent(ProductList.this, ProductDetail.class);
                             intent.putExtra("ProductId", searchAdapter.getRef(position).getKey());
                             startActivity(intent);
                         }
@@ -379,8 +383,10 @@ public class FoodList extends AppCompatActivity {
 
                     if(model.getPhone().equals(Util.currentUser.getPhone())){
 
-                        viewHolder.getFood_name().setText(model.getName());
-                        Picasso.get().load(model.getImage()).into(viewHolder.getFood_image());
+                        viewHolder.getProduct_name().setText(model.getName());
+                        viewHolder.getProduct_own().setText(model.getPhone());
+                        viewHolder.getProduct_price().setText(model.getPrice() + "$");
+                        Picasso.get().load(model.getImage()).into(viewHolder.getProduct_image());
 
                         //Add Favorites
                         if (localDB.isFavorite(adapter.getRef(position).getKey()))
@@ -395,11 +401,11 @@ public class FoodList extends AppCompatActivity {
                                 if (!localDB.isFavorite(adapter.getRef(position).getKey())) {
                                     localDB.addToFavorites(adapter.getRef(position).getKey());
                                     viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_black_24dp);
-                                    Toast.makeText(FoodList.this, model.getName() + " was added to Favorites!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ProductList.this, model.getName() + " was added to Favorites!", Toast.LENGTH_SHORT).show();
                                 } else {
                                     localDB.removeFromFavorites(adapter.getRef(position).getKey());
                                     viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                                    Toast.makeText(FoodList.this, model.getName() + " was removed from Favorites!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ProductList.this, model.getName() + " was removed from Favorites!", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -417,14 +423,14 @@ public class FoodList extends AppCompatActivity {
                                         Util.dateFormat.format(endDate.getTime())
 
                                 ));
-                                Toast.makeText(FoodList.this, "Added to Cart!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ProductList.this, "Added to Cart!", Toast.LENGTH_SHORT).show();
                             }
                         });
 
                         viewHolder.setItemClickListener(new ItemClickListener() {
                             @Override
                             public void onClick(View view, int position, boolean isLongClick) {
-                                Intent intent = new Intent(FoodList.this, FoodDetail.class);
+                                Intent intent = new Intent(ProductList.this, ProductDetail.class);
                                 intent.putExtra("ProductId", adapter.getRef(position).getKey());
                                 startActivity(intent);
                             }
@@ -433,8 +439,10 @@ public class FoodList extends AppCompatActivity {
                 }
                 else{
 
-                    viewHolder.getFood_name().setText(model.getName());
-                    Picasso.get().load(model.getImage()).into(viewHolder.getFood_image());
+                    viewHolder.getProduct_name().setText(model.getName());
+                    viewHolder.getProduct_own().setText(model.getPhone());
+                    viewHolder.getProduct_price().setText(model.getPrice() + "$");
+                    Picasso.get().load(model.getImage()).into(viewHolder.getProduct_image());
 
                     //Add Favorites
                     if (localDB.isFavorite(adapter.getRef(position).getKey()))
@@ -449,11 +457,11 @@ public class FoodList extends AppCompatActivity {
                             if (!localDB.isFavorite(adapter.getRef(position).getKey())) {
                                 localDB.addToFavorites(adapter.getRef(position).getKey());
                                 viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_black_24dp);
-                                Toast.makeText(FoodList.this, model.getName() + " was added to Favorites!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ProductList.this, model.getName() + " was added to Favorites!", Toast.LENGTH_SHORT).show();
                             } else {
                                 localDB.removeFromFavorites(adapter.getRef(position).getKey());
                                 viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                                Toast.makeText(FoodList.this, model.getName() + " was removed from Favorites!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ProductList.this, model.getName() + " was removed from Favorites!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -471,14 +479,14 @@ public class FoodList extends AppCompatActivity {
                                     Util.dateFormat.format(endDate.getTime())
 
                             ));
-                            Toast.makeText(FoodList.this, "Added to Cart!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProductList.this, "Added to Cart!", Toast.LENGTH_SHORT).show();
                         }
                     });
 
                     viewHolder.setItemClickListener(new ItemClickListener() {
                         @Override
                         public void onClick(View view, int position, boolean isLongClick) {
-                            Intent intent = new Intent(FoodList.this, FoodDetail.class);
+                            Intent intent = new Intent(ProductList.this, ProductDetail.class);
                             intent.putExtra("ProductId", adapter.getRef(position).getKey());
                             startActivity(intent);
                         }
@@ -516,9 +524,9 @@ public class FoodList extends AppCompatActivity {
                 .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (newFood != null) {
-                            productWaitList.push().setValue(newFood);
-                            Snackbar.make(swipeLayout, "New product: " + newFood.getName() + " was added to wait list!", Snackbar.LENGTH_SHORT).show();
+                        if (newProduct != null) {
+                            productWaitList.push().setValue(newProduct);
+                            Snackbar.make(swipeLayout, "New product: " + newProduct.getName() + " was added to wait list!", Snackbar.LENGTH_SHORT).show();
                         }
                     }
                 })
@@ -565,12 +573,12 @@ public class FoodList extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
-                            Toast.makeText(FoodList.this, "Uploaded !", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProductList.this, "Uploaded !", Toast.LENGTH_SHORT).show();
                             imageFolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     // set value for newCategory if image upload and we can get download link
-                                    newFood = new Product(
+                                    newProduct = new Product(
                                             name.getText().toString(),
                                             uri.toString(),
                                             description.getText().toString(),
@@ -588,7 +596,7 @@ public class FoodList extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             progressDialog.dismiss();
-                            Toast.makeText(FoodList.this, "Upload failure ... " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProductList.this, "Upload failure ... " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -613,7 +621,7 @@ public class FoodList extends AppCompatActivity {
         }
     }
 
-    private void showDialogUpdateFood(final String key, final Product item) {
+    private void showDialogUpdateProduct(final String key, final Product item) {
         LayoutInflater inflater = this.getLayoutInflater();
         View v = inflater.inflate(R.layout.add_new_product_layout, null);
 
@@ -673,15 +681,15 @@ public class FoodList extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         if(item.getTitle().equals(Util.UPDATE)){
-            showDialogUpdateFood(adapter.getRef(item.getOrder()).getKey(), adapter.getItem(item.getOrder()));
+            showDialogUpdateProduct(adapter.getRef(item.getOrder()).getKey(), adapter.getItem(item.getOrder()));
         }
         else if(item.getTitle().equals(Util.DELETE)){
-            deleteFood(adapter.getRef(item.getOrder()).getKey());
+            deleteProduct(adapter.getRef(item.getOrder()).getKey());
         }
         return super.onContextItemSelected(item);
     }
 
-    private void deleteFood(String key) {
+    private void deleteProduct(String key) {
         productList.child(key).removeValue();
         Toast.makeText(this, "Item Deleted!", Toast.LENGTH_SHORT).show();
     }
@@ -700,7 +708,7 @@ public class FoodList extends AppCompatActivity {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss();
-                            Toast.makeText(FoodList.this, "Uploaded !", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProductList.this, "Uploaded !", Toast.LENGTH_SHORT).show();
                             imageFolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
@@ -714,7 +722,7 @@ public class FoodList extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             progressDialog.dismiss();
-                            Toast.makeText(FoodList.this, "Upload failure ... " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ProductList.this, "Upload failure ... " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
