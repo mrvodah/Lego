@@ -98,14 +98,7 @@ public class Home extends AppCompatActivity
         tvFullName = headerView.findViewById(R.id.tvfullname);
         tvFullName.setText(Util.currentUser.getName());
 
-//        Intent service = new Intent(Home.this, ListenDialog.class);
-//        startService(service);
-//
-//        Intent serviceOrder = new Intent(Home.this, ListenOrder.class);
-//        startService(serviceOrder);
-
         loadContent(Constant.FRAGMENT_OTHER_LIST);
-//        loadContent(Constant.FRAGMENT_MY_LIST);
     }
 
     @Override
@@ -117,7 +110,6 @@ public class Home extends AppCompatActivity
         }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -153,18 +145,6 @@ public class Home extends AppCompatActivity
 
                                 if (pw.getText().toString().equals(Util.currentUser.getPassword()) &&
                                         npw.getText().toString().equals(rpnpw.getText().toString())) {
-
-//                                Util.currentUser.setPassword(npw.getText().toString());
-//                                user.child(Util.currentUser.getPhone()).setValue(
-//                                        new User(
-//                                                Util.currentUser.getName(),
-//                                                Util.currentUser.getPassword(),
-//                                                Util.currentUser.getIsStaff(),
-//                                                Util.currentUser.getSecureCode()
-//                                        )
-//                                );
-//
-//                                Toast.makeText(Home.this, "Password changed!", Toast.LENGTH_SHORT).show();
 
                                     Map<String, Object> map = new HashMap<>();
                                     map.put("password", npw.getText().toString());

@@ -28,8 +28,6 @@ import io.paperdb.Paper;
 
 public class SplashScreen extends AppCompatActivity {
 
-    @BindView(R.id.tvSlogan)
-    TextView tvSlogan;
     @BindView(R.id.btnSignUp)
     FButton btnSignUp;
     @BindView(R.id.btnSignIn)
@@ -57,10 +55,6 @@ public class SplashScreen extends AppCompatActivity {
             if(!user.isEmpty() && !pwd.isEmpty())
                 login(user, pwd);
         }
-
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/NABILA.TTF");
-        tvSlogan.setTypeface(typeface);
-
     }
 
     private void login(final String us, final String pwd) {
