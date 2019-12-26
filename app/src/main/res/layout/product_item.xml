@@ -45,15 +45,6 @@
 
                 <ImageView
                     android:clickable="true"
-                    android:id="@+id/fav"
-                    android:layout_weight="1"
-                    android:tint="@color/colorPrimary"
-                    android:src="@drawable/ic_favorite_border_black_24dp"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
-
-                <ImageView
-                    android:clickable="true"
                     android:id="@+id/iv_cart"
                     android:layout_weight="1"
                     android:tint="@color/colorPrimary"

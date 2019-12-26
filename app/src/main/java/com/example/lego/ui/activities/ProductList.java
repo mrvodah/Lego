@@ -240,28 +240,6 @@ public class ProductList extends AppCompatActivity {
                         viewHolder.getProduct_price().setText(model.getPrice() + "$");
                         Picasso.get().load(model.getImage()).into(viewHolder.getProduct_image());
 
-                        //Add Favorites
-                        if (localDB.isFavorite(adapter.getRef(position).getKey()))
-                            viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_black_24dp);
-                        else
-                            viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_border_black_24dp);
-
-                        //Click to change state of Favorites
-                        viewHolder.getFav_image().setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if (!localDB.isFavorite(adapter.getRef(position).getKey())) {
-                                    localDB.addToFavorites(adapter.getRef(position).getKey());
-                                    viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_black_24dp);
-                                    Toast.makeText(ProductList.this, model.getName() + " was added to Favorites!", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    localDB.removeFromFavorites(adapter.getRef(position).getKey());
-                                    viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                                    Toast.makeText(ProductList.this, model.getName() + " was removed from Favorites!", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-
                         viewHolder.getCart_image().setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -294,28 +272,6 @@ public class ProductList extends AppCompatActivity {
                     viewHolder.getProduct_own().setText(model.getPhone());
                     viewHolder.getProduct_price().setText(model.getPrice() + "$");
                     Picasso.get().load(model.getImage()).into(viewHolder.getProduct_image());
-
-                    //Add Favorites
-                    if (localDB.isFavorite(adapter.getRef(position).getKey()))
-                        viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_black_24dp);
-                    else
-                        viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_border_black_24dp);
-
-                    //Click to change state of Favorites
-                    viewHolder.getFav_image().setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (!localDB.isFavorite(adapter.getRef(position).getKey())) {
-                                localDB.addToFavorites(adapter.getRef(position).getKey());
-                                viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_black_24dp);
-                                Toast.makeText(ProductList.this, model.getName() + " was added to Favorites!", Toast.LENGTH_SHORT).show();
-                            } else {
-                                localDB.removeFromFavorites(adapter.getRef(position).getKey());
-                                viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                                Toast.makeText(ProductList.this, model.getName() + " was removed from Favorites!", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
 
                     viewHolder.getCart_image().setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -388,28 +344,6 @@ public class ProductList extends AppCompatActivity {
                         viewHolder.getProduct_price().setText(model.getPrice() + "$");
                         Picasso.get().load(model.getImage()).into(viewHolder.getProduct_image());
 
-                        //Add Favorites
-                        if (localDB.isFavorite(adapter.getRef(position).getKey()))
-                            viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_black_24dp);
-                        else
-                            viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_border_black_24dp);
-
-                        //Click to change state of Favorites
-                        viewHolder.getFav_image().setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                if (!localDB.isFavorite(adapter.getRef(position).getKey())) {
-                                    localDB.addToFavorites(adapter.getRef(position).getKey());
-                                    viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_black_24dp);
-                                    Toast.makeText(ProductList.this, model.getName() + " was added to Favorites!", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    localDB.removeFromFavorites(adapter.getRef(position).getKey());
-                                    viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                                    Toast.makeText(ProductList.this, model.getName() + " was removed from Favorites!", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-
                         viewHolder.getCart_image().setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -443,28 +377,6 @@ public class ProductList extends AppCompatActivity {
                     viewHolder.getProduct_own().setText(model.getPhone());
                     viewHolder.getProduct_price().setText(model.getPrice() + "$");
                     Picasso.get().load(model.getImage()).into(viewHolder.getProduct_image());
-
-                    //Add Favorites
-                    if (localDB.isFavorite(adapter.getRef(position).getKey()))
-                        viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_black_24dp);
-                    else
-                        viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_border_black_24dp);
-
-                    //Click to change state of Favorites
-                    viewHolder.getFav_image().setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (!localDB.isFavorite(adapter.getRef(position).getKey())) {
-                                localDB.addToFavorites(adapter.getRef(position).getKey());
-                                viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_black_24dp);
-                                Toast.makeText(ProductList.this, model.getName() + " was added to Favorites!", Toast.LENGTH_SHORT).show();
-                            } else {
-                                localDB.removeFromFavorites(adapter.getRef(position).getKey());
-                                viewHolder.getFav_image().setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                                Toast.makeText(ProductList.this, model.getName() + " was removed from Favorites!", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
 
                     viewHolder.getCart_image().setOnClickListener(new View.OnClickListener() {
                         @Override

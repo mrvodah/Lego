@@ -48,7 +48,7 @@ public class ProductDetail extends AppCompatActivity implements RatingDialogList
 
     private static final String TAG = "TAG";
     @BindView(R.id.img_product)
-    ImageView imgFood;
+    ImageView imgProduct;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.collapsing)
@@ -79,7 +79,7 @@ public class ProductDetail extends AppCompatActivity implements RatingDialogList
     DatabaseReference ratingTbl;
 
     String productId;
-    Product currentFood;
+    Product currentProduct;
     @BindView(R.id.ratingBar)
     RatingBar ratingBar;
 
@@ -117,17 +117,17 @@ public class ProductDetail extends AppCompatActivity implements RatingDialogList
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Integer.valueOf(numberButton.getNumber()) > currentFood.getRemain()){
+                if(Integer.valueOf(numberButton.getNumber()) > currentProduct.getRemain()){
                     Toast.makeText(ProductDetail.this, "Số sản phẩm còn lại không đủ!", Toast.LENGTH_SHORT).show();
                 }
                 else{
 
                     new Database(getBaseContext()).addToCart(new Order(
                             productId,
-                            currentFood.getName(),
+                            currentProduct.getName(),
                             numberButton.getNumber(),
-                            currentFood.getPrice(),
-                            currentFood.getDiscount(),
+                            currentProduct.getPrice(),
+                            currentProduct.getDiscount(),
                             dateFormat.format(new Date()),
                             dateFormat.format(endDate.getTime())
                     ));
@@ -139,8 +139,8 @@ public class ProductDetail extends AppCompatActivity implements RatingDialogList
 
         if (getIntent() != null) {
             productId = getIntent().getStringExtra("ProductId");
-            getDetailFood(productId);
-            getRatingFood(productId);
+            getDetailProduct(productId);
+            getRatingProduct(productId);
         }
 
     }
@@ -150,7 +150,7 @@ public class ProductDetail extends AppCompatActivity implements RatingDialogList
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
-    private void getRatingFood(final String productId) {
+    private void getRatingProduct(final String productId) {
         ratingTbl.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -168,22 +168,22 @@ public class ProductDetail extends AppCompatActivity implements RatingDialogList
         });
     }
 
-    private void getDetailFood(String productId) {
+    private void getDetailProduct(String productId) {
 
         products.child(productId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                currentFood = dataSnapshot.getValue(Product.class);
+                currentProduct = dataSnapshot.getValue(Product.class);
 
-                Picasso.get().load(currentFood.getImage()).into(imgFood);
+                Picasso.get().load(currentProduct.getImage()).into(imgProduct);
 
-                collapsing.setTitle(currentFood.getName());
+                collapsing.setTitle(currentProduct.getName());
 
-                productName.setText(currentFood.getName());
-                productPrice.setText(currentFood.getPrice());
-                tvNumber.setText("Số sản phẩm: " + currentFood.getRemain() + "/" + currentFood.getTotal());
-                productDescription.setText(currentFood.getDescription());
+                productName.setText(currentProduct.getName());
+                productPrice.setText(currentProduct.getPrice());
+                tvNumber.setText("Số sản phẩm: " + currentProduct.getRemain() + "/" + currentProduct.getTotal());
+                productDescription.setText(currentProduct.getDescription());
 
             }
 
