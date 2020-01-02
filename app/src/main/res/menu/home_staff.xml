@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Quản ly sản phẩm">
+    <item android:title="Product management">
         <menu>
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_staff_1"
                     android:icon="@drawable/ic_restaurant_black_24dp"
                     android:iconTint="@color/white"
-                    android:title="Danh sách lego"/>
+                    android:title="List lego"/>
 
             </group>
         </menu>
     </item>
 
-    <item android:title="Quản lý đơn hàng">
+    <item android:title="Order management">
         <menu>
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_staff_3"
                     android:icon="@drawable/ic_restaurant_black_24dp"
                     android:iconTint="@color/white"
-                    android:title="Danh sách đơn thuê"/>
+                    android:title="Rental orders"/>
 
                 <item
                     android:id="@+id/nav_staff_4"
                     android:icon="@drawable/ic_restaurant_black_24dp"
                     android:iconTint="@color/white"
-                    android:title="Danh sách đơn bán"/>
+                    android:title="Sale orders"/>
             </group>
         </menu>
     </item>
 
-    <item android:title="Trợ giúp">
+    <item android:title="Help">
         <menu>
             <group android:checkableBehavior="single">
 

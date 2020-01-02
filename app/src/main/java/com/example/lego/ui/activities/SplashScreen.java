@@ -112,9 +112,11 @@ public class SplashScreen extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.btnSignUp:
                 startActivity(new Intent(SplashScreen.this, SignUp.class));
+                finish();
                 break;
             case R.id.btnSignIn:
                 startActivity(new Intent(SplashScreen.this, SignIn.class));
+                finish();
                 break;
         }
     }

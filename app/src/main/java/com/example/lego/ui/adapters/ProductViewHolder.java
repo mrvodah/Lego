@@ -15,7 +15,7 @@ import com.example.lego.R;
 
 public class ProductViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public ImageView product_image, fav_image, cart_image;
+    public ImageView product_image, cart_image;
     public TextView product_name, product_price, product_own;
 
     ItemClickListener itemClickListener;
@@ -27,7 +27,6 @@ public class ProductViewHolder extends RecyclerView.ViewHolder implements View.O
         product_name = itemView.findViewById(R.id.product_name);
         product_price = itemView.findViewById(R.id.product_price);
         product_own = itemView.findViewById(R.id.product_own);
-        fav_image = itemView.findViewById(R.id.fav);
         cart_image = itemView.findViewById(R.id.iv_cart);
 
         itemView.setOnClickListener(this);
@@ -36,14 +35,6 @@ public class ProductViewHolder extends RecyclerView.ViewHolder implements View.O
 
     public ImageView getProduct_image() {
         return product_image;
-    }
-
-    public ImageView getFav_image() {
-        return fav_image;
-    }
-
-    public void setFav_image(ImageView fav_image) {
-        this.fav_image = fav_image;
     }
 
     public ImageView getCart_image() {

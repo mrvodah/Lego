@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <item android:title="Quản lý chung">
+    <item android:title="General">
         <menu>
             <group android:checkableBehavior="single">
 
@@ -11,19 +11,19 @@
                     android:id="@+id/nav_1"
                     android:icon="@drawable/ic_restaurant_black_24dp"
                     android:iconTint="@android:color/white"
-                    android:title="Danh sách Lego" />
+                    android:title="List Lego" />
 
                 <item
                     android:id="@+id/nav_2"
                     android:icon="@drawable/ic_restaurant_black_24dp"
                     android:iconTint="@android:color/white"
-                    android:title="Bán Lego" />
+                    android:title="My Lego" />
 
             </group>
         </menu>
     </item>
 
-    <item android:title="Trạng thái đơn">
+    <item android:title="Order status">
         <menu>
             <group android:checkableBehavior="single">
 
@@ -31,13 +31,13 @@
                     android:id="@+id/nav_3"
                     android:icon="@drawable/ic_restaurant_black_24dp"
                     android:iconTint="@android:color/white"
-                    android:title="Đơn thuê" />
+                    android:title="Rental orders" />
 
                 <item
                     android:id="@+id/nav_4"
                     android:icon="@drawable/ic_restaurant_black_24dp"
                     android:iconTint="@android:color/white"
-                    android:title="Đơn bán" />
+                    android:title="Sale orders" />
 
             </group>
         </menu>
