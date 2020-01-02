@@ -52,7 +52,7 @@ public class OrderStatus extends AppCompatActivity {
         rvOrder.setLayoutManager(layoutManager);
         rvOrder.setHasFixedSize(true);
 
-        if(getIntent().getStringExtra("userPhone") == null)
+        if (getIntent().getStringExtra("userPhone") == null)
             loadOrders(Util.currentUser.getPhone());
         else
             loadOrders(getIntent().getStringExtra("userPhone"));
@@ -86,11 +86,9 @@ public class OrderStatus extends AppCompatActivity {
 
 
     private String convertCodeToStatus(String status) {
-        if(status.equals("0"))
-            return "Placed";
-        else if(status.equals("1"))
-            return "On my way";
-        else
-            return "Shipped";
+        if (status.equals("0"))
+            return "Waiting";
+
+        return "Accept";
     }
 }

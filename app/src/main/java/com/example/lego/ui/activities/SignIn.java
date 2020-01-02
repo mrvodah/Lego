@@ -2,19 +2,15 @@ package com.example.lego.ui.activities;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.lego.R;
+import com.example.lego.ui.activities.staff.HomeStaffActivity;
+import com.example.lego.ui.activities.user.Home;
 import com.example.lego.utils.Util;
 import com.example.lego.models.User;
 import com.google.firebase.database.DataSnapshot;
@@ -30,7 +26,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import info.hoang8f.widget.FButton;
 import io.paperdb.Paper;
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class SignIn extends AppCompatActivity {

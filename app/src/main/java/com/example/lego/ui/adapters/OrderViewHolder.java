@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lego.R;
 
+import info.hoang8f.widget.FButton;
+
 /**
  * Created by VietVan on 13/06/2018.
  */
@@ -16,6 +18,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder{
 
     public TextView tvOrderId, tvOrderStatus, tvOrderPhone, tvOrderAddress, tvOrderDate;
     public LinearLayout lnContainer;
+    public FButton fbAccept, fbRemove;
 
     public OrderViewHolder(View itemView) {
         super(itemView);
@@ -26,6 +29,9 @@ public class OrderViewHolder extends RecyclerView.ViewHolder{
         tvOrderAddress = itemView.findViewById(R.id.order_address);
         tvOrderDate = itemView.findViewById(R.id.order_date);
         lnContainer = itemView.findViewById(R.id.ln_container);
+
+        fbAccept= itemView.findViewById(R.id.btnAccept);
+        fbRemove= itemView.findViewById(R.id.btnRemove);
 
     }
 
@@ -75,5 +81,21 @@ public class OrderViewHolder extends RecyclerView.ViewHolder{
 
     public void setLnContainer(LinearLayout lnContainer) {
         this.lnContainer = lnContainer;
+    }
+
+    public FButton getFbAccept() {
+        return fbAccept;
+    }
+
+    public void setFbAccept(FButton fbAccept) {
+        this.fbAccept = fbAccept;
+    }
+
+    public FButton getFbRemove() {
+        return fbRemove;
+    }
+
+    public void setFbRemove(FButton fbRemove) {
+        this.fbRemove = fbRemove;
     }
 }

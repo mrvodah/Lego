@@ -1,4 +1,4 @@
-package com.example.lego.ui.activities;
+package com.example.lego.ui.activities.user;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.lego.Constant;
 import com.example.lego.R;
+import com.example.lego.ui.activities.SplashScreen;
 import com.example.lego.ui.fragments.HireFragment;
 import com.example.lego.ui.fragments.MyListFragment;
 import com.example.lego.ui.fragments.OtherListFragment;
@@ -32,8 +33,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.HashMap;

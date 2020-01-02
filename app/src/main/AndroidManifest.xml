@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.activities.HomeStaffActivity"></activity>
+        <activity android:name=".ui.activities.staff.HomeStaffActivity"></activity>
         <activity android:name=".ui.activities.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,12 +24,12 @@
         <activity android:name=".ui.activities.SignIn" />
         <activity android:name=".ui.activities.SignUp" />
         <activity
-            android:name=".ui.activities.Home"
+            android:name=".ui.activities.user.Home"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme" />
         <activity android:name=".ui.activities.ProductList" />
         <activity android:name=".ui.activities.ProductDetail" />
-        <activity android:name=".ui.activities.Cart" />
+        <activity android:name=".ui.activities.user.Cart" />
         <activity android:name=".ui.activities.OrderStatus" />
         <activity android:name=".ui.activities.OrderDetail" />
 

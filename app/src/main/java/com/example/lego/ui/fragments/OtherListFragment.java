@@ -21,7 +21,7 @@ import com.example.lego.R;
 import com.example.lego.database.Database;
 import com.example.lego.interfaces.ItemClickListener;
 import com.example.lego.models.Category;
-import com.example.lego.ui.activities.Cart;
+import com.example.lego.ui.activities.user.Cart;
 import com.example.lego.ui.activities.ProductList;
 import com.example.lego.ui.adapters.MenuViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;

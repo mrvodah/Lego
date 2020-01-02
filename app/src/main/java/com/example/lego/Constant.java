@@ -9,4 +9,5 @@ public interface Constant {
     int FRAGMENT_SELL_LIST = 4;
     int FRAGMENT_LIST_STAFF = 5;
     int FRAGMENT_LIST_SELL_STAFF = 6;
+    int FRAGMENT_ORDER_STAFF = 7;
 }
