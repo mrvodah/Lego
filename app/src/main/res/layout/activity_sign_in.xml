@@ -49,13 +49,6 @@
                 android:text="Remember me"
                 app:cbd_tickColor="@color/colorPrimaryDark" />
 
-            <TextView
-                android:id="@+id/tvForgotPwd"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/forgot_pwd" />
-
         </LinearLayout>
 
     </LinearLayout>

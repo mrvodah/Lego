@@ -1,4 +1,4 @@
-package com.example.lego.ui.activities;
+package com.example.lego.ui.activities.user;
 
 import android.content.Context;
 import android.content.DialogInterface;

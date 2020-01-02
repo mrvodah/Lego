@@ -2,16 +2,16 @@ package com.example.lego.ui.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.lego.R;
+import com.example.lego.ui.activities.staff.HomeStaffActivity;
+import com.example.lego.ui.activities.user.Home;
 import com.example.lego.utils.Util;
 import com.example.lego.models.User;
 import com.google.firebase.database.DataSnapshot;
@@ -112,9 +112,11 @@ public class SplashScreen extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.btnSignUp:
                 startActivity(new Intent(SplashScreen.this, SignUp.class));
+                finish();
                 break;
             case R.id.btnSignIn:
                 startActivity(new Intent(SplashScreen.this, SignIn.class));
+                finish();
                 break;
         }
     }

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
-import com.example.lego.ui.activities.Cart;
+import com.example.lego.ui.activities.user.Cart;
 import com.example.lego.utils.Util;
 import com.example.lego.database.Database;
 import com.example.lego.models.Order;

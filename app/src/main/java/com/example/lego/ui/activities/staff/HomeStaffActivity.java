@@ -1,4 +1,4 @@
-package com.example.lego.ui.activities;
+package com.example.lego.ui.activities.staff;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -22,11 +22,9 @@ import android.widget.Toast;
 import com.example.lego.Constant;
 import com.example.lego.R;
 import com.example.lego.services.ListenOrder;
-import com.example.lego.ui.fragments.HireFragment;
+import com.example.lego.ui.activities.SplashScreen;
 import com.example.lego.ui.fragments.ListStaffFragment;
-import com.example.lego.ui.fragments.MyListFragment;
-import com.example.lego.ui.fragments.OtherListFragment;
-import com.example.lego.ui.fragments.SellFragment;
+import com.example.lego.ui.fragments.OrderFragment;
 import com.example.lego.ui.fragments.SellStaffFragment;
 import com.example.lego.utils.Util;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -34,8 +32,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.HashMap;
@@ -109,6 +105,9 @@ public class HomeStaffActivity extends AppCompatActivity
             case Constant.FRAGMENT_LIST_STAFF:
                 fragment = new ListStaffFragment();
                 break;
+                case Constant.FRAGMENT_ORDER_STAFF:
+                fragment = new OrderFragment();
+                    break;
             case Constant.FRAGMENT_LIST_SELL_STAFF:
                 fragment = new SellStaffFragment();
                 break;
@@ -129,7 +128,7 @@ public class HomeStaffActivity extends AppCompatActivity
                 loadContent(Constant.FRAGMENT_LIST_STAFF);
                 break;
             case R.id.nav_staff_3:
-
+                loadContent(Constant.FRAGMENT_ORDER_STAFF);
                 break;
             case R.id.nav_staff_4:
                 loadContent(Constant.FRAGMENT_LIST_SELL_STAFF);
@@ -152,18 +151,6 @@ public class HomeStaffActivity extends AppCompatActivity
 
                                 if (pw.getText().toString().equals(Util.currentUser.getPassword()) &&
                                         npw.getText().toString().equals(rpnpw.getText().toString())) {
-
-//                                Util.currentUser.setPassword(npw.getText().toString());
-//                                user.child(Util.currentUser.getPhone()).setValue(
-//                                        new User(
-//                                                Util.currentUser.getName(),
-//                                                Util.currentUser.getPassword(),
-//                                                Util.currentUser.getIsStaff(),
-//                                                Util.currentUser.getSecureCode()
-//                                        )
-//                                );
-//
-//                                Toast.makeText(HomeStaffActivity.this, "Password changed!", Toast.LENGTH_SHORT).show();
 
                                     Map<String, Object> map = new HashMap<>();
                                     map.put("password", npw.getText().toString());
@@ -199,7 +186,6 @@ public class HomeStaffActivity extends AppCompatActivity
                         .show();
                 break;
             case R.id.nav_staff_6:
-                //Delete rememeber user & pwd
                 Paper.book().destroy();
 
                 Intent intent = new Intent(HomeStaffActivity.this, SplashScreen.class);
