@@ -134,9 +134,9 @@ public class Cart extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
 
                         // calculate total price
-                        int ntotal = 0;
+                        float ntotal = 0;
                         for (Order order : cart)
-                            ntotal += Integer.parseInt(order.getPrice()) * Integer.parseInt(order.getQuantity());
+                            ntotal += Float.parseFloat(order.getPrice()) * Float.parseFloat(order.getQuantity());
 
                         // Create request
                         Request request = new Request(
@@ -177,9 +177,9 @@ public class Cart extends AppCompatActivity {
         listCart.setAdapter(new CartAdapter(cart, this));
 
         // calculate total price
-        int ntotal = 0;
+        float ntotal = 0;
         for (Order order : cart)
-            ntotal += Integer.parseInt(order.getPrice()) * Integer.parseInt(order.getQuantity());
+            ntotal += Float.parseFloat(order.getPrice()) * Float.parseFloat(order.getQuantity());
 
         Locale locale = Locale.getDefault();
         NumberFormat format = NumberFormat.getCurrencyInstance(locale);

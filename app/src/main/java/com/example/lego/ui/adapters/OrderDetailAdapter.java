@@ -65,7 +65,7 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
 
             name.setText("Name: " + order.getProductName());
             quantity.setText("Quantity: " + order.getQuantity());
-            price.setText("Price: " + format.format(Integer.parseInt(order.getPrice())));
+            price.setText("Price: " + format.format(Float.parseFloat(order.getPrice())));
             discount.setText("Discount: " + order.getDiscount());
             date.setText("Date: " + order.getStartDate() + " - " + order.getEndDate());
         }

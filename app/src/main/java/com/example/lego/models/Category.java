@@ -5,7 +5,7 @@ package com.example.lego.models;
  */
 
 public class Category {
-    private String Name, Image, ShopId;
+    private String Name, Image;
 
     public Category() {
     }
@@ -13,7 +13,6 @@ public class Category {
     public Category(String name, String image) {
         Name = name;
         Image = image;
-        ShopId = "1";
     }
 
     public String getName() {
@@ -32,20 +31,11 @@ public class Category {
         Image = image;
     }
 
-    public String getShopId() {
-        return ShopId;
-    }
-
-    public void setShopId(String shopId) {
-        ShopId = shopId;
-    }
-
     @Override
     public String toString() {
         return "Category{" +
                 "Name='" + Name + '\'' +
                 ", Image='" + Image + '\'' +
-                ", ShopId='" + ShopId + '\'' +
                 '}';
     }
 }

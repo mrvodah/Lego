@@ -108,7 +108,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
             Locale locale = new Locale("en", "US");
             NumberFormat format = NumberFormat.getCurrencyInstance(locale);;
-            int nprice = Integer.parseInt(order.getPrice()) * Integer.parseInt(order.getQuantity());
+            float nprice = Float.parseFloat(order.getPrice()) * Float.parseFloat(order.getQuantity());
             price.setText(format.format(nprice));
 
             time.setText("Thời gian thuê: " + order.getStartDate() + " - " + order.getEndDate());
