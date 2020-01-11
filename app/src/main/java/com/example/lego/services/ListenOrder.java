@@ -14,7 +14,10 @@ import androidx.core.app.NotificationCompat;
 
 import com.example.lego.R;
 import com.example.lego.models.Request;
+import com.example.lego.ui.activities.OrderDetail;
 import com.example.lego.ui.activities.OrderStatus;
+import com.example.lego.ui.activities.staff.HomeStaffActivity;
+import com.example.lego.utils.Util;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Random;
+
+import butterknife.internal.Utils;
 
 public class ListenOrder extends Service implements ChildEventListener {
 
@@ -84,6 +89,7 @@ public class ListenOrder extends Service implements ChildEventListener {
                     mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
                     notifManager.createNotificationChannel(mChannel);
                 }
+                Util.currentRequest = request;
                 builder = new NotificationCompat.Builder(context, id);
                 intent = new Intent(context, OrderStatus.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);

@@ -30,7 +30,7 @@ public class OrderDetail extends AppCompatActivity {
     @BindView(R.id.order_comments)
     TextView orderComments;
 
-    public String id;
+    public String id = "013679";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

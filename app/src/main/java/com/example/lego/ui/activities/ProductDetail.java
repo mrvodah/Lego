@@ -103,7 +103,7 @@ public class ProductDetail extends AppCompatActivity implements RatingDialogList
         ButterKnife.bind(this);
 
         endDate.add(Calendar.WEEK_OF_YEAR, 1);
-        tvPickDate.setText("Chọn ngày trả: " + dateFormat.format(endDate.getTime()));
+        tvPickDate.setText("Expire date: " + dateFormat.format(endDate.getTime()));
 
         // Init Firebase
         database = FirebaseDatabase.getInstance();
@@ -182,7 +182,7 @@ public class ProductDetail extends AppCompatActivity implements RatingDialogList
 
                 productName.setText(currentProduct.getName());
                 productPrice.setText(currentProduct.getPrice());
-                tvNumber.setText("Số sản phẩm: " + currentProduct.getRemain() + "/" + currentProduct.getTotal());
+                tvNumber.setText("Total: " + currentProduct.getRemain() + "/" + currentProduct.getTotal());
                 productDescription.setText(currentProduct.getDescription());
 
             }
@@ -207,7 +207,7 @@ public class ProductDetail extends AppCompatActivity implements RatingDialogList
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         endDate = Calendar.getInstance();
                         endDate.set(year, monthOfYear, dayOfMonth);
-                        tvPickDate.setText("Chọn ngày trả: " + dateFormat.format(endDate.getTime()));
+                        tvPickDate.setText("Expire date: " + dateFormat.format(endDate.getTime()));
                     }
 
                 }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -256,7 +256,7 @@ public class ProductDetail extends AppCompatActivity implements RatingDialogList
                 else
                     ratingTbl.child(productId).setValue(rating);
 
-                Toast.makeText(ProductDetail.this, "Thank yu for submit rating!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProductDetail.this, "Thank you for submit rating!", Toast.LENGTH_SHORT).show();
                 ratingTbl.removeEventListener(this);
             }
 

@@ -14,7 +14,7 @@ import com.example.lego.interfaces.ItemClickListener;
  * Created by VietVan on 06/06/2018.
  */
 
-public class ProductViewHolderStaff extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class ProductViewHolderStaff extends RecyclerView.ViewHolder {
 
     public ImageView product_image;
     public TextView product_name, product_price, product_phone, product_number;
@@ -33,9 +33,6 @@ public class ProductViewHolderStaff extends RecyclerView.ViewHolder implements V
 
         btnEdit = itemView.findViewById(R.id.btnEdit);
         btnRemove = itemView.findViewById(R.id.btnRemove);
-
-        itemView.setOnClickListener(this);
-
     }
 
     public ImageView getProduct_image() {
@@ -92,14 +89,5 @@ public class ProductViewHolderStaff extends RecyclerView.ViewHolder implements V
 
     public void setBtnRemove(Button btnRemove) {
         this.btnRemove = btnRemove;
-    }
-
-    public void setItemClickListener(ItemClickListener itemClickListener) {
-        this.itemClickListener = itemClickListener;
-    }
-
-    @Override
-    public void onClick(View v) {
-        itemClickListener.onClick(v, getAdapterPosition(), false);
     }
 }

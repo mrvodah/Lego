@@ -149,7 +149,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="10dp"
-                            android:text="Số sản phẩm: 3/3" />
+                            android:text="Total: 3/3" />
 
                     </LinearLayout>
 
@@ -165,11 +165,15 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="10dp"
-                            android:text="Chọn ngày trả:" />
+                            android:text="Expire date:" />
 
                         <Button
                             android:id="@+id/btn_pick_date"
-                            android:text="Chọn ngày"
+                            android:text="Pick expire date"
+                            android:paddingStart="10dp"
+                            android:textColor="@color/white"
+                            android:paddingRight="10dp"
+                            android:background="@color/colorAccent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 

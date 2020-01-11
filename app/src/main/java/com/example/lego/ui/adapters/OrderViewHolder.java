@@ -17,7 +17,7 @@ import info.hoang8f.widget.FButton;
 public class OrderViewHolder extends RecyclerView.ViewHolder{
 
     public TextView tvOrderId, tvOrderStatus, tvOrderPhone, tvOrderAddress, tvOrderDate;
-    public LinearLayout lnContainer;
+    public LinearLayout lnContainer, lnContent;
     public FButton fbAccept, fbRemove;
 
     public OrderViewHolder(View itemView) {
@@ -29,6 +29,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder{
         tvOrderAddress = itemView.findViewById(R.id.order_address);
         tvOrderDate = itemView.findViewById(R.id.order_date);
         lnContainer = itemView.findViewById(R.id.ln_container);
+        lnContent = itemView.findViewById(R.id.ln_content);
 
         fbAccept= itemView.findViewById(R.id.btnAccept);
         fbRemove= itemView.findViewById(R.id.btnRemove);
@@ -97,5 +98,13 @@ public class OrderViewHolder extends RecyclerView.ViewHolder{
 
     public void setFbRemove(FButton fbRemove) {
         this.fbRemove = fbRemove;
+    }
+
+    public LinearLayout getLnContent() {
+        return lnContent;
+    }
+
+    public void setLnContent(LinearLayout lnContent) {
+        this.lnContent = lnContent;
     }
 }

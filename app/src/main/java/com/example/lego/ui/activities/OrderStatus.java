@@ -1,6 +1,8 @@
 package com.example.lego.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,15 +28,11 @@ public class OrderStatus extends AppCompatActivity {
 
     @BindView(R.id.rv_hire)
     RecyclerView rvOrder;
-    @BindView(R.id.order_total)
-    TextView orderTotal;
-    @BindView(R.id.order_btnPlaceOrder)
-    FButton orderBtnPlaceOrder;
-    RecyclerView.LayoutManager layoutManager;
 
     FirebaseDatabase database;
     DatabaseReference requests;
-    int sum;
+
+    RecyclerView.LayoutManager layoutManager;
 
     FirebaseRecyclerAdapter<Request, OrderViewHolder> adapter;
 
@@ -52,21 +50,15 @@ public class OrderStatus extends AppCompatActivity {
         rvOrder.setLayoutManager(layoutManager);
         rvOrder.setHasFixedSize(true);
 
-        if (getIntent().getStringExtra("userPhone") == null)
-            loadOrders(Util.currentUser.getPhone());
-        else
-            loadOrders(getIntent().getStringExtra("userPhone"));
+        loadOrders();
     }
 
-    private void loadOrders(String phone) {
-        sum = 0;
-        Locale locale = new Locale("en", "US");
-        final NumberFormat format = NumberFormat.getCurrencyInstance(locale);
+    private void loadOrders() {
         adapter = new FirebaseRecyclerAdapter<Request, OrderViewHolder>(
                 Request.class,
-                R.layout.order_layout,
+                R.layout.order_layout_staff,
                 OrderViewHolder.class,
-                requests.orderByChild("phone").equalTo(phone)
+                requests.orderByChild("status").equalTo("0")
         ) {
             @Override
             protected void populateViewHolder(OrderViewHolder viewHolder, Request model, int position) {
@@ -75,8 +67,30 @@ public class OrderStatus extends AppCompatActivity {
                 viewHolder.getTvOrderPhone().setText(model.getPhone());
                 viewHolder.getTvOrderAddress().setText(model.getAddress());
 
-                sum += Integer.valueOf(model.getTotal());
-                orderTotal.setText(format.format(sum));
+                viewHolder.getFbAccept().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Request item = adapter.getItem(position);
+                        item.setStatus("1");
+                        requests.child(adapter.getRef(position).getKey()).setValue(item);
+                    }
+                });
+
+                viewHolder.getFbRemove().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        requests.child(adapter.getRef(position).getKey()).removeValue();
+                    }
+                });
+
+                viewHolder.getLnContent().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Util.currentRequest = model;
+                        Intent intent = new Intent(OrderStatus.this, OrderDetail.class);
+                        startActivity(intent);
+                    }
+                });
             }
         };
 
@@ -84,9 +98,8 @@ public class OrderStatus extends AppCompatActivity {
         rvOrder.setAdapter(adapter);
     }
 
-
     private String convertCodeToStatus(String status) {
-        if (status.equals("0"))
+        if(status.equals("0"))
             return "Waiting";
 
         return "Accept";

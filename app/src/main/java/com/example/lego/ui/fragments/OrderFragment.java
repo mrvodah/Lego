@@ -2,6 +2,7 @@ package com.example.lego.ui.fragments;
 
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.lego.R;
 import com.example.lego.models.Product;
 import com.example.lego.models.Request;
+import com.example.lego.ui.activities.OrderDetail;
+import com.example.lego.ui.activities.OrderStatus;
 import com.example.lego.ui.adapters.OrderViewHolder;
 import com.example.lego.utils.DialogUtil;
 import com.example.lego.utils.Util;
@@ -99,6 +102,15 @@ public class OrderFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         requests.child(adapter.getRef(position).getKey()).removeValue();
+                    }
+                });
+
+                viewHolder.getLnContent().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Util.currentRequest = model;
+                        Intent intent = new Intent(getContext(), OrderDetail.class);
+                        startActivity(intent);
                     }
                 });
             }
